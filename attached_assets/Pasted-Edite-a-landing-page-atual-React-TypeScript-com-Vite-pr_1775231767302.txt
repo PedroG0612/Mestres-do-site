@@ -1,0 +1,104 @@
+Edite a landing page atual (React + TypeScript com Vite), principalmente o arquivo Home.tsx, com foco total em aumentar conversão.
+
+⚠️ Regras importantes:
+
+NÃO recrie o projeto
+NÃO quebre a estrutura existente
+Apenas edite e melhore o código atual
+Mantenha o design base (cores azul e amarelo)
+Pode reorganizar seções se necessário
+Pode criar novos componentes
+🚨 CORREÇÃO CRÍTICA (OBRIGATÓRIA)
+CEO
+Substituir qualquer informação atual incorreta
+Usar:
+Nome: Giovanni Ballarin
+Cargo: CEO da Mestres do Site
+Usar a imagem fornecida do CEO
+Ajustar texto para transmitir autoridade real
+🔥 1. HEADLINE (TORNAR MAIS AGRESSIVA)
+
+Substituir a headline atual por algo mais focado em dor + resultado.
+
+Exemplo base:
+"Pare de perder clientes todos os dias por não ter um site que vende."
+
+Subheadline:
+
+Reforçar resultado direto (mais clientes, mais vendas)
+
+Adicionar CTA forte logo no hero:
+👉 “Quero mais clientes agora”
+
+💬 2. DEPOIMENTOS (PROVA SOCIAL)
+
+Adicionar uma seção com 2 a 4 depoimentos fictícios realistas:
+
+Cada depoimento deve ter:
+
+Nome
+Cidade
+Resultado alcançado
+
+Exemplo:
+"Depois que refiz meu site, comecei a receber clientes toda semana." – João, SP
+
+Usar componentes como Card
+
+💰 3. TRANSFORMAR SERVIÇOS EM BENEFÍCIOS
+
+Substituir textos atuais dos serviços:
+
+❌ Evitar descrição técnica
+✅ Focar em resultado
+
+Exemplos:
+
+“Sites profissionais” →
+“Sites que transformam visitantes em clientes”
+“Tráfego pago” →
+“Anúncios que trazem clientes prontos para comprar”
+“SEO” →
+“Apareça no Google e seja encontrado todos os dias”
+📣 4. MAIS CTAs AO LONGO DA PÁGINA
+
+Adicionar botões CTA em pontos estratégicos:
+
+Após hero
+Após seção de problemas
+Após serviços
+No final da página
+
+Texto dos botões:
+
+“Falar no WhatsApp agora”
+“Quero mais clientes”
+
+Todos devem levar à mesma ação (WhatsApp ou modal)
+
+🎁 5. OFERTA CLARA (GRATUITA)
+
+Adicionar uma oferta forte:
+
+Exemplo:
+“Ganhe uma análise gratuita do seu site e descubra como aumentar seus clientes”
+
+Criar uma seção destacada com:
+
+Título forte
+Pequena explicação
+CTA
+⚡ 6. AJUSTES GERAIS DE CONVERSÃO
+Deixar textos mais diretos e persuasivos
+Reduzir linguagem genérica
+Melhorar hierarquia visual
+Destacar mais os botões
+🎯 FOCO FINAL
+Conversão acima de tudo
+Clareza
+Autoridade
+Ação rápida (lead)
+📦 IMPORTANTE (RESPOSTA)
+Mostrar apenas os arquivos modificados
+Incluir novos componentes se criar
+Não explicar, apenas entregar o código
