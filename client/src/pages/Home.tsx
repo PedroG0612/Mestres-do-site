@@ -8,6 +8,8 @@ import { trpc } from "@/lib/trpc";
 import logoImg from "@assets/image_1775233079551.png";
 import {
   CheckCircle,
+  CheckCircle2,
+  XCircle,
   Star,
   ArrowRight,
   TrendingUp,
@@ -118,7 +120,7 @@ function ScarcityBadge({ className = "" }: { className?: string }) {
   return (
     <div className={`inline-flex items-center gap-2 bg-red-600 text-white font-sans font-bold text-sm px-4 py-2 rounded-full shadow-lg ${className}`}>
       <AlertTriangle className="h-4 w-4 flex-shrink-0" />
-      Apenas {VAGAS_DISPONIVEIS} de {TOTAL_VAGAS} vagas disponíveis
+      Restam apenas {VAGAS_DISPONIVEIS} de {TOTAL_VAGAS} vagas disponíveis
     </div>
   );
 }
@@ -251,7 +253,7 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="text-center mb-12">
             <motion.h2 variants={fadeUp} className="text-3xl lg:text-4xl font-bold text-blue-900 mb-4">
               Se algum desses problemas parece familiar, então você{" "}
-              <span className="text-red-600 underline decoration-wavy">PRECISA</span>{" "}
+              <span className="font-extrabold">PRECISA</span>{" "}
               desse diagnóstico!
             </motion.h2>
           </motion.div>
@@ -386,7 +388,7 @@ export default function Home() {
                 ou preencher formulário
               </button>
               <div className="bg-red-600 text-white font-sans font-bold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5">
-                <AlertTriangle className="h-3.5 w-3.5" /> Apenas {VAGAS_DISPONIVEIS} de {TOTAL_VAGAS} vagas
+                <AlertTriangle className="h-3.5 w-3.5" /> Restam apenas {VAGAS_DISPONIVEIS} de {TOTAL_VAGAS} vagas
               </div>
             </motion.div>
           </motion.div>
@@ -529,29 +531,42 @@ export default function Home() {
       </section>
 
       {/* ── QUEBRA DE OBJEÇÃO ── */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-16 lg:py-24 bg-slate-50">
         <div className="container max-w-3xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="text-center">
-            <motion.h2 variants={fadeUp} className="text-3xl lg:text-4xl font-bold text-blue-900 mb-10">
-              Mas atenção...
-            </motion.h2>
-
-            <motion.div variants={stagger} className="grid sm:grid-cols-2 gap-4 mb-8">
-              <motion.div variants={fadeUp} className="flex items-center gap-4 bg-red-50 border border-red-200 rounded-2xl p-5">
-                <span className="text-2xl">🔴</span>
-                <p className="text-slate-800 font-sans font-semibold text-lg text-left">Não é aula</p>
-              </motion.div>
-              <motion.div variants={fadeUp} className="flex items-center gap-4 bg-red-50 border border-red-200 rounded-2xl p-5">
-                <span className="text-2xl">🔴</span>
-                <p className="text-slate-800 font-sans font-semibold text-lg text-left">Não é apresentação comercial</p>
-              </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger}>
+            <motion.div variants={fadeUp} className="text-center mb-10">
+              <span className="inline-block bg-blue-100 text-blue-700 font-sans font-semibold text-sm px-4 py-1.5 rounded-full mb-4">
+                Antes de continuar
+              </span>
+              <h2 className="text-3xl lg:text-4xl font-bold text-blue-900">
+                Mas atenção...
+              </h2>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="flex items-center justify-center gap-4 bg-green-50 border-2 border-green-400 rounded-2xl p-6 mb-10">
-              <span className="text-2xl">🟢</span>
-              <p className="text-green-800 font-sans font-bold text-xl">
-                É uma conversa estratégica focada na sua realidade
-              </p>
+            <motion.div variants={stagger} className="grid sm:grid-cols-2 gap-4 mb-6">
+              {[
+                { label: "Não é aula" },
+                { label: "Não é apresentação comercial" },
+              ].map((item) => (
+                <motion.div key={item.label} variants={fadeUp} className="flex items-center gap-4 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <XCircle className="h-5 w-5 text-red-500" />
+                  </div>
+                  <p className="text-slate-700 font-sans font-semibold text-base">{item.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="flex items-center gap-5 bg-blue-900 rounded-2xl p-6 shadow-md">
+              <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
+                <CheckCircle2 className="h-6 w-6 text-blue-900" />
+              </div>
+              <div className="text-left">
+                <p className="text-yellow-400 font-sans text-xs font-bold uppercase tracking-wider mb-1">O que é de verdade</p>
+                <p className="text-white font-sans font-bold text-lg leading-snug">
+                  É uma conversa estratégica focada na sua realidade
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         </div>
