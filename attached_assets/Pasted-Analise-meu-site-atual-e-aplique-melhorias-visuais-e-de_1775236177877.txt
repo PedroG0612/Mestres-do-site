@@ -1,0 +1,77 @@
+Analise meu site atual e aplique melhorias visuais e de responsividade mantendo totalmente minha identidade, usando como referência o estilo moderno e profissional do site da GOAT Digital.
+
+OBJETIVO:
+Deixar meu site com aparência premium, fluida e profissional, semelhante ao estilo da GOAT Digital, mantendo exatamente o mesmo conteúdo, cores e estrutura atual.
+
+REGRAS IMPORTANTES:
+- NÃO mudar cores
+- NÃO mudar textos
+- NÃO remover seções
+- NÃO recriar o site
+- Apenas melhorar design, animações e responsividade
+
+REFERÊNCIA:
+- Usar como base o estilo visual da GOAT Digital (animações suaves, fluidez, aparência moderna e profissional)
+
+MELHORIAS APLICAR:
+
+1. ESTILO VISUAL (BASE GOAT DIGITAL)
+- Aplicar aparência moderna, limpa e sofisticada
+- Melhorar espaçamento e alinhamento
+- Criar sensação de site premium
+
+2. ANIMAÇÕES AO ROLAR (SCROLL)
+- Elementos aparecem suavemente ao descer a página (fade + leve movimento)
+- Aplicar efeito em sequência (um após o outro)
+- Criar fluidez visual semelhante à GOAT Digital
+
+3. EFEITO CASCATA
+- Títulos, textos e imagens surgem com pequenos delays
+- Criar experiência dinâmica e profissional
+
+4. INTERAÇÕES (HOVER)
+- Botões com leve crescimento ou destaque
+- Cards com leve elevação (shadow + scale)
+- Transições suaves (ease-in-out)
+
+5. ELEMENTOS VISUAIS
+- Adicionar detalhes gráficos sutis próximos aos títulos (linhas, destaques)
+- Animações leves nesses elementos
+
+6. SUAVIDADE GERAL
+- Todas animações devem ser leves e elegantes
+- Evitar exageros
+- Manter aparência de agência premium
+
+7. MOBILE — CONSISTÊNCIA COM DESKTOP (PRIORIDADE MÁXIMA)
+
+- A versão mobile deve ficar visualmente IGUAL ao desktop (mesmo padrão e qualidade)
+- NÃO deixar o mobile parecer versão inferior
+
+TIPOGRAFIA:
+- Corrigir fontes que ficam estranhas no celular
+- Ajustar tamanhos para manter proporção do desktop
+- Evitar quebras feias de texto
+
+LAYOUT:
+- Corrigir qualquer desalinhamento
+- Evitar elementos saindo da tela
+- Manter organização limpa
+
+ESPAÇAMENTO:
+- Ajustar margens e espaçamentos para manter “respiro” igual ao desktop
+
+BOTÕES:
+- Manter mesmo estilo do desktop
+- Apenas adaptar tamanho para toque
+
+ANIMAÇÕES NO MOBILE:
+- Manter mesmas animações do desktop
+- Apenas otimizar para performance
+
+RESPONSIVIDADE:
+- Ajustes finos para diferentes telas
+- Garantir aparência consistente em qualquer celular
+
+RESULTADO FINAL:
+O site deve manter tudo que já existe, porém com aparência moderna, animações suaves e estilo visual semelhante ao da GOAT Digital, com versão mobile perfeitamente consistente com a versão desktop, sem perda de qualidade ou estética.
