@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FaWhatsapp } from "react-icons/fa";
 import { trpc } from "@/lib/trpc";
-import logoImg from "@assets/image_1775233984544.png";
 import {
   CheckCircle,
   CheckCircle2,
@@ -31,6 +30,24 @@ import {
   Quote,
   AlertTriangle,
 } from "lucide-react";
+
+function Logo({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex items-center gap-2 ${className}`}>
+      <svg width="42" height="38" viewBox="0 0 42 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="21" cy="16" r="5"  stroke="white" strokeWidth="2.5" fill="none" />
+        <circle cx="21" cy="16" r="10" stroke="white" strokeWidth="2"   fill="none" />
+        <circle cx="21" cy="16" r="15" stroke="white" strokeWidth="1.5" fill="none" />
+        <path d="M 11 35 L 11 20 L 23 30 L 18 30 L 21 37 L 18.5 38 L 15.5 31 L 11 35 Z" fill="white" />
+      </svg>
+      <span className="leading-none select-none">
+        <span className="text-white font-black text-xl tracking-tight">mestres</span>
+        <span className="text-white font-light text-xl tracking-tight">do</span>
+        <span className="text-white font-black text-xl tracking-tight">site.</span>
+      </span>
+    </div>
+  );
+}
 
 const WHATSAPP_NUMBER = "5511940000000";
 const WHATSAPP_MESSAGE = encodeURIComponent(
@@ -131,7 +148,7 @@ const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } }
 export default function Home() {
   const [formSuccess, setFormSuccess] = useState(false);
   const formRef = useRef<HTMLElement>(null);
-  const countdown = useCountdown(24);
+  const countdown = useCountdown(0.5);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<LeadForm>({ resolver: zodResolver(leadSchema) });
   const submitLead = trpc.leads.submit.useMutation({
@@ -169,7 +186,7 @@ export default function Home() {
         {/* ── NAV ── */}
         <nav className="bg-blue-900 shadow-md">
           <div className="container py-3 flex items-center justify-between">
-            <img src={logoImg} alt="Mestres do Site" className="h-9 w-auto" />
+            <Logo />
             <div className="flex items-center gap-3">
               <a href="https://www.instagram.com/mestresdosite" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-1.5 text-blue-200 hover:text-white font-sans text-sm transition-colors">
                 <Instagram className="h-4 w-4" /> @mestresdosite
@@ -751,7 +768,7 @@ export default function Home() {
         <div className="container">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             <div>
-              <img src={logoImg} alt="Mestres do Site" className="h-9 w-auto mb-3" />
+              <Logo className="mb-3" />
               <p className="text-blue-300 font-sans text-sm leading-relaxed">
                 Transformando negócios brasileiros com presença digital que realmente vende.
               </p>
