@@ -178,18 +178,6 @@ function SectionLabelLight({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* WhatsApp chat bubble simulation */
-function WaBubble({ text, time, isClient }: { text: string; time: string; isClient?: boolean }) {
-  return (
-    <div className={`flex ${isClient ? "justify-start" : "justify-end"}`}>
-      <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm ${isClient ? "bg-white text-slate-800 rounded-tl-sm" : "bg-green-500 text-white rounded-tr-sm"}`}>
-        <p>{text}</p>
-        <p className={`text-[10px] mt-1 text-right ${isClient ? "text-slate-400" : "text-green-100"}`}>{time} ✓✓</p>
-      </div>
-    </div>
-  );
-}
-
 /* Portfolio card */
 function PortfolioCard({ gradient, category, title, result, index }: {
   gradient: string; category: string; title: string; result: string; index: number;
@@ -268,36 +256,12 @@ const vp = { once: true, margin: "-60px" } as const;
 
 /* ─────────────── Portfolio data ─────────────── */
 const PORTFOLIO = [
-  { gradient: "bg-gradient-to-br from-blue-600 to-indigo-800", category: "Site + SEO", title: "Clínica Odontológica — Dra. Patrícia Luz", result: "+3x agendamentos", index: 0 },
-  { gradient: "bg-gradient-to-br from-emerald-500 to-teal-700", category: "Landing Page", title: "Consultoria Financeira — Capital Crescer", result: "+220 leads/mês", index: 1 },
-  { gradient: "bg-gradient-to-br from-orange-500 to-rose-700", category: "E-commerce", title: "Loja de Moda Feminina — Belle Fashion", result: "+R$18k/mês", index: 2 },
-  { gradient: "bg-gradient-to-br from-violet-600 to-purple-800", category: "Tráfego Pago", title: "Escritório de Contabilidade — ContaFlex", result: "1ª página Google", index: 3 },
-  { gradient: "bg-gradient-to-br from-cyan-500 to-blue-700", category: "Site Institucional", title: "Escola de Idiomas — FluenTalk", result: "+85 matrículas", index: 4 },
-  { gradient: "bg-gradient-to-br from-amber-500 to-orange-700", category: "Site + Ads", title: "Imobiliária — Prime Imóveis", result: "+40 contatos/mês", index: 5 },
-];
-
-/* ─────────────── WA chats ─────────────── */
-const WA_CHATS = [
-  {
-    name: "Carlos M.", role: "Escritório de Contabilidade",
-    messages: [
-      { text: "Boa tarde! Queria dizer que desde que fizemos o site com vocês...", time: "14:32", isClient: true },
-      { text: "estamos recebendo em média 12 contatos por semana sem gastar nada em anúncio! 🎉", time: "14:32", isClient: true },
-    ],
-  },
-  {
-    name: "Ana B.", role: "Loja de Moda",
-    messages: [
-      { text: "Gente, esse mês fechamos mais de R$18 mil só pelo site! Isso nunca aconteceu antes 😱", time: "09:15", isClient: true },
-      { text: "Incrível! Fico muito feliz pelos seus resultados, Ana 🙏", time: "09:17", isClient: false },
-    ],
-  },
-  {
-    name: "João S.", role: "Clínica Odontológica",
-    messages: [
-      { text: "Em 2 meses triplicamos os agendamentos. Não consigo imaginar meu negócio sem vocês.", time: "18:45", isClient: true },
-    ],
-  },
+  { gradient: "bg-gradient-to-br from-blue-600 to-indigo-800", category: "Marketing Digital + SEO", title: "Clínica Odontológica — Dra. Patrícia Luz", result: "+3x agendamentos", index: 0 },
+  { gradient: "bg-gradient-to-br from-emerald-500 to-teal-700", category: "Geração de Leads", title: "Consultoria Financeira — Capital Crescer", result: "+220 leads/mês", index: 1 },
+  { gradient: "bg-gradient-to-br from-orange-500 to-rose-700", category: "Estratégia de Vendas", title: "Loja de Moda Feminina — Belle Fashion", result: "+R$18k/mês em vendas", index: 2 },
+  { gradient: "bg-gradient-to-br from-violet-600 to-purple-800", category: "Tráfego Pago + SEO", title: "Escritório de Contabilidade — ContaFlex", result: "ROAS 8.45 · 1ª página Google", index: 3 },
+  { gradient: "bg-gradient-to-br from-cyan-500 to-blue-700", category: "Crescimento Orgânico", title: "Escola de Idiomas — FluenTalk", result: "+85 matrículas em 60 dias", index: 4 },
+  { gradient: "bg-gradient-to-br from-amber-500 to-orange-700", category: "Marketing + Ads", title: "Imobiliária — Prime Imóveis", result: "+40 contatos qualificados/mês", index: 5 },
 ];
 
 /* ─────────────── Page ─────────────── */
@@ -386,7 +350,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-base sm:text-lg lg:text-xl text-blue-200 font-sans leading-relaxed mb-4 max-w-2xl mx-auto">
-              Criamos sites profissionais e estratégias digitais que geram clientes reais — não só visitas. Mais contatos, mais vendas, mais crescimento.
+              Ajudamos empresas a crescer com estratégias completas de marketing digital — tráfego pago, SEO, conteúdo e automação. Mais clientes, mais vendas, crescimento previsível.
             </motion.p>
 
             <motion.p variants={fadeUp} className="text-sm sm:text-base text-yellow-300/90 font-sans font-medium italic mb-10 max-w-xl mx-auto">
@@ -436,7 +400,7 @@ export default function Home() {
               { value: 3500, suffix: "+", label: "Clientes Conquistados" },
               { value: 9, suffix: " anos", label: "De Experiência" },
               { value: 98, suffix: "%", label: "Clientes Satisfeitos" },
-              { value: 150, suffix: "+", label: "Sites Lançados/Ano" },
+              { value: 150, suffix: "+", label: "Estratégias Executadas/Ano" },
             ].map((s) => (
               <motion.div key={s.label} variants={fadeUp}>
                 <StatCounter {...s} />
@@ -541,7 +505,7 @@ export default function Home() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
             {[
-              { icon: <Globe className="h-6 w-6" />, title: "Sites que transformam visitantes em clientes", desc: "Um site profissional que vende enquanto você dorme — moderno, rápido e feito para converter.", color: "bg-blue-600", shadow: "shadow-blue-500/20" },
+              { icon: <Globe className="h-6 w-6" />, title: "Presença digital que transforma visitantes em clientes", desc: "Estratégia completa de presença online — desde o site até o funil de conversão — feita para gerar clientes de verdade.", color: "bg-blue-600", shadow: "shadow-blue-500/20" },
               { icon: <TrendingUp className="h-6 w-6" />, title: "Anúncios que trazem clientes prontos para comprar", desc: "Google e Meta Ads com foco em quem já quer o que você vende — sem desperdício de verba.", color: "bg-yellow-500", shadow: "shadow-yellow-500/20" },
               { icon: <Users className="h-6 w-6" />, title: "Apareça no Google e seja encontrado todo dia", desc: "SEO e conteúdo estratégico para você aparecer quando o cliente precisar exatamente do que você oferece.", color: "bg-green-600", shadow: "shadow-green-500/20" },
               { icon: <Zap className="h-6 w-6" />, title: "Leads qualificados chegando todo mês no automático", desc: "Estratégia completa de inbound marketing para atrair, nutrir e converter sem depender de indicação.", color: "bg-purple-600", shadow: "shadow-purple-500/20" },
@@ -576,10 +540,10 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-14">
             <motion.div variants={fadeIn}><SectionLabel>Portfólio</SectionLabel></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-4 leading-tight">
-              Sites que geram clientes de verdade
+              Resultados que geramos para nossos clientes
             </motion.h2>
             <motion.p variants={fadeUp} className="text-slate-500 font-sans text-base sm:text-lg max-w-2xl mx-auto">
-              Projetos reais com resultados mensuráveis — cada site feito para converter visitantes em clientes.
+              Casos reais de crescimento — mais clientes, mais receita e resultados mensuráveis para cada negócio que atendemos.
             </motion.p>
           </motion.div>
 
@@ -595,7 +559,7 @@ export default function Home() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="text-center">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-blue-700 hover:bg-blue-600 text-white font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-blue-600/30 inline-flex items-center gap-2">
-              <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Quero um site assim para mim
+              <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Quero resultados assim para minha empresa
             </a>
           </motion.div>
         </div>
@@ -611,10 +575,10 @@ export default function Home() {
                 <Gift className="h-4 w-4" /> 100% Gratuito — Sem Compromisso
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-3 leading-tight">
-                Ganhe uma análise completa do seu site agora
+                Ganhe uma análise completa da sua estratégia de marketing agora
               </h2>
               <p className="text-blue-800 font-sans text-base sm:text-lg mb-2">
-                Descubra exatamente por que você está perdendo clientes e o que fazer para mudar isso.
+                Descubra exatamente por que você está perdendo clientes e qual estratégia vai gerar crescimento previsível para o seu negócio.
               </p>
               <ul className="space-y-2 mt-5">
                 {[
@@ -696,12 +660,49 @@ export default function Home() {
               <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
               <Quote className="h-8 w-8 text-yellow-400 mx-auto mb-5 opacity-70 relative" />
               <p className="relative text-blue-100 font-sans text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-6 italic">
-                "Todo empresário merece uma presença digital que trabalha por ele 24 horas por dia. Minha missão é garantir que você nunca mais perca um cliente para o concorrente por falta de um site que vende."
+                "Todo empresário merece uma estratégia de marketing digital que trabalha por ele 24 horas por dia. Minha missão é garantir que você nunca mais perca um cliente para o concorrente por falta de uma estratégia que realmente gera crescimento."
               </p>
               <cite className="relative text-yellow-400 font-sans font-bold text-sm not-italic">— Giovanni Ballarin, CEO da Mestres do Site</cite>
             </motion.div>
           </motion.div>
         </div>
+      </section>
+
+      {/* ── VÍDEO ── */}
+      <section className="py-20 lg:py-28 bg-blue-950 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+        <div className="container max-w-4xl mx-auto relative">
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-10">
+            <motion.div variants={fadeIn}><SectionLabelLight>Veja na prática</SectionLabelLight></motion.div>
+            <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
+              Veja como geramos clientes e crescimento real
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-blue-200 font-sans text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              Resultados que falam por si — sem enrolação, sem promessa vazia. Só estratégia e execução.
+            </motion.p>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="relative w-full rounded-2xl overflow-hidden shadow-2xl shadow-blue-900/60 border border-blue-800/40">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                src="https://www.youtube.com/embed/F_8cI9n08DU?rel=0&modestbranding=1"
+                title="Mestres do Site — Como geramos clientes e crescimento real"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                style={{ border: "none" }}
+              />
+            </div>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="text-center mt-10">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-yellow-500/20 inline-flex items-center gap-2">
+              <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Quero crescer assim também
+            </a>
+          </motion.div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/40 to-transparent" />
       </section>
 
       {/* ── DEPOIMENTOS ── */}
@@ -710,30 +711,9 @@ export default function Home() {
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-14">
             <motion.div variants={fadeIn}><SectionLabel>Prova social</SectionLabel></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-4 leading-tight">
-              Empresários que pararam de perder clientes
+              Quem já transformou seus resultados com a gente
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-slate-500 font-sans text-base sm:text-lg">Resultados reais de quem confiou na Mestres do Site.</motion.p>
-          </motion.div>
-
-          {/* ── WhatsApp prints ── */}
-          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="grid sm:grid-cols-3 gap-4 mb-14 max-w-4xl mx-auto">
-            {WA_CHATS.map((chat) => (
-              <motion.div key={chat.name} variants={fadeUp} className="bg-slate-100 rounded-2xl overflow-hidden shadow-md">
-                {/* WA header */}
-                <div className="bg-green-600 px-4 py-3 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center text-white font-black text-sm flex-shrink-0">{chat.name[0]}</div>
-                  <div className="min-w-0">
-                    <p className="text-white font-bold text-sm truncate">{chat.name}</p>
-                    <p className="text-green-200 text-xs truncate">{chat.role}</p>
-                  </div>
-                  <FaWhatsapp className="h-4 w-4 text-green-300 ml-auto flex-shrink-0" />
-                </div>
-                {/* Messages */}
-                <div className="bg-[#e5ddd5] p-3 flex flex-col gap-2 min-h-[100px]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4b5a0' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}>
-                  {chat.messages.map((msg, i) => <WaBubble key={i} {...msg} />)}
-                </div>
-              </motion.div>
-            ))}
+            <motion.p variants={fadeUp} className="text-slate-500 font-sans text-base sm:text-lg">Crescimento real de quem confiou na Mestres do Site.</motion.p>
           </motion.div>
 
           {/* Written testimonials */}
@@ -1025,7 +1005,7 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
             <div>
               <Logo className="mb-4" />
-              <p className="text-blue-400 font-sans text-sm leading-relaxed">Transformando negócios brasileiros com presença digital que realmente vende.</p>
+              <p className="text-blue-400 font-sans text-sm leading-relaxed">Ajudamos negócios brasileiros a crescer com marketing digital que gera clientes reais e crescimento previsível.</p>
               <a href="https://www.instagram.com/mestresdosite" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 text-blue-400 hover:text-white font-sans text-sm transition-colors duration-200">
                 <Instagram className="h-4 w-4" /> @mestresdosite
               </a>
