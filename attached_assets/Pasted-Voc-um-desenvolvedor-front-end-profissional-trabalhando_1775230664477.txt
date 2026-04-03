@@ -1,0 +1,76 @@
+Você é um desenvolvedor front-end profissional trabalhando dentro de um projeto existente no Replit.
+
+Melhore a landing page atual (React + TypeScript com Vite), focando em aumentar a taxa de conversão, sem recriar o projeto do zero.
+
+⚠️ Regras importantes:
+
+NÃO recrie o projeto
+NÃO quebre a estrutura existente
+Edite principalmente o arquivo Home.tsx
+Pode ajustar seções e layout para melhorar conversão
+Pode criar novos componentes se necessário
+Mantenha o site leve e responsivo
+OBJETIVO
+
+Aumentar geração de leads e incentivar o usuário a entrar em contato.
+
+IMPLEMENTAR:
+1. URGÊNCIA (TEMPO LIMITADO)
+Adicionar um contador regressivo visível no topo da página
+Texto exemplo:
+"Oferta por tempo limitado – fale conosco hoje"
+O contador deve funcionar em tempo real (React com useState + useEffect)
+Estilo chamativo, mas profissional (usar azul e amarelo)
+2. SEÇÃO “QUEM SOMOS” (AGÊNCIA + CEO)
+Criar uma nova seção apresentando:
+A agência
+O CEO/responsável
+Incluir:
+Foto do CEO
+Nome (se disponível)
+Pequena descrição profissional (credibilidade)
+Layout moderno e confiável
+3. ÍCONE CORRETO DO WHATSAPP
+Substituir qualquer ícone atual por um ícone oficial do WhatsApp
+Pode usar:
+react-icons (ex: FaWhatsapp)
+ou SVG fiel
+Garantir que o botão esteja bem visível (flutuante ou nos CTAs)
+4. MELHORIAS DE CONVERSÃO (DESIGN + SEÇÕES)
+Ajustar o design mantendo consistência
+Usar paleta:
+Azul (principal)
+Amarelo (destaque/CTA)
+
+Adicionar ou melhorar:
+
+Headline mais forte no topo
+Botões CTA mais visíveis
+Seções mais organizadas (menos texto, mais direto)
+Espaçamento e hierarquia visual melhores
+5. USAR REFERÊNCIA REAL (INSTAGRAM)
+Basear textos e informações no Instagram:
+https://www.instagram.com/mestresdosite
+Extrair:
+Nome da marca
+Tipo de serviço
+Linguagem usada
+Adaptar isso para a landing page
+6. CTA (CHAMADA PARA AÇÃO)
+Inserir botões como:
+“Falar no WhatsApp”
+“Solicitar orçamento”
+Repetir CTAs ao longo da página
+Todos devem levar à mesma ação (WhatsApp ou modal)
+7. ANIMAÇÕES
+Adicionar animações leves (fade/slide)
+Sem exagero
+FOCO FINAL
+Conversão
+Clareza
+Confiança
+Visual profissional
+IMPORTANTE (RESPOSTA)
+Mostrar apenas os arquivos modificados
+Incluir novos componentes se criar
+Não explicar, apenas entregar o código
