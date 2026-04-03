@@ -29,6 +29,9 @@ import {
   MapPin,
   Quote,
   AlertTriangle,
+  ExternalLink,
+  Sparkles,
+  Rocket,
 } from "lucide-react";
 
 /* ─────────────── Logo ─────────────── */
@@ -175,6 +178,72 @@ function SectionLabelLight({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* WhatsApp chat bubble simulation */
+function WaBubble({ text, time, isClient }: { text: string; time: string; isClient?: boolean }) {
+  return (
+    <div className={`flex ${isClient ? "justify-start" : "justify-end"}`}>
+      <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed shadow-sm ${isClient ? "bg-white text-slate-800 rounded-tl-sm" : "bg-green-500 text-white rounded-tr-sm"}`}>
+        <p>{text}</p>
+        <p className={`text-[10px] mt-1 text-right ${isClient ? "text-slate-400" : "text-green-100"}`}>{time} ✓✓</p>
+      </div>
+    </div>
+  );
+}
+
+/* Portfolio card */
+function PortfolioCard({ gradient, category, title, result, index }: {
+  gradient: string; category: string; title: string; result: string; index: number;
+}) {
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.07 } },
+      }}
+      className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-shadow duration-500"
+    >
+      {/* Mock screenshot */}
+      <div className={`${gradient} h-52 sm:h-56 relative overflow-hidden`}>
+        {/* Browser chrome mockup */}
+        <div className="absolute top-0 left-0 right-0 bg-black/30 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+          </div>
+          <div className="flex-1 bg-white/20 rounded-full h-4 mx-2" />
+        </div>
+        {/* Fake page content lines */}
+        <div className="absolute inset-0 pt-12 px-5 flex flex-col gap-2.5 opacity-30">
+          <div className="h-5 bg-white/60 rounded-full w-3/4" />
+          <div className="h-3 bg-white/40 rounded-full w-full" />
+          <div className="h-3 bg-white/40 rounded-full w-5/6" />
+          <div className="h-3 bg-white/40 rounded-full w-4/6" />
+          <div className="h-8 bg-white/70 rounded-xl w-1/3 mt-2" />
+          <div className="grid grid-cols-3 gap-2 mt-2">
+            <div className="h-12 bg-white/30 rounded-xl" />
+            <div className="h-12 bg-white/30 rounded-xl" />
+            <div className="h-12 bg-white/30 rounded-xl" />
+          </div>
+        </div>
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-blue-900/80 opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col items-center justify-center gap-3">
+          <ExternalLink className="h-8 w-8 text-white/80" />
+          <span className="text-white font-bold text-sm tracking-wide">Ver projeto</span>
+        </div>
+      </div>
+      {/* Card info */}
+      <div className="bg-white p-4 border-t border-slate-100">
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-blue-600 font-sans text-xs font-semibold uppercase tracking-wider">{category}</span>
+          <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">{result}</span>
+        </div>
+        <h3 className="font-bold text-blue-900 text-sm leading-snug">{title}</h3>
+      </div>
+    </motion.div>
+  );
+}
+
 /* ─────────────── Animation Variants ─────────────── */
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -196,6 +265,40 @@ const staggerFast = {
 };
 
 const vp = { once: true, margin: "-60px" } as const;
+
+/* ─────────────── Portfolio data ─────────────── */
+const PORTFOLIO = [
+  { gradient: "bg-gradient-to-br from-blue-600 to-indigo-800", category: "Site + SEO", title: "Clínica Odontológica — Dra. Patrícia Luz", result: "+3x agendamentos", index: 0 },
+  { gradient: "bg-gradient-to-br from-emerald-500 to-teal-700", category: "Landing Page", title: "Consultoria Financeira — Capital Crescer", result: "+220 leads/mês", index: 1 },
+  { gradient: "bg-gradient-to-br from-orange-500 to-rose-700", category: "E-commerce", title: "Loja de Moda Feminina — Belle Fashion", result: "+R$18k/mês", index: 2 },
+  { gradient: "bg-gradient-to-br from-violet-600 to-purple-800", category: "Tráfego Pago", title: "Escritório de Contabilidade — ContaFlex", result: "1ª página Google", index: 3 },
+  { gradient: "bg-gradient-to-br from-cyan-500 to-blue-700", category: "Site Institucional", title: "Escola de Idiomas — FluenTalk", result: "+85 matrículas", index: 4 },
+  { gradient: "bg-gradient-to-br from-amber-500 to-orange-700", category: "Site + Ads", title: "Imobiliária — Prime Imóveis", result: "+40 contatos/mês", index: 5 },
+];
+
+/* ─────────────── WA chats ─────────────── */
+const WA_CHATS = [
+  {
+    name: "Carlos M.", role: "Escritório de Contabilidade",
+    messages: [
+      { text: "Boa tarde! Queria dizer que desde que fizemos o site com vocês...", time: "14:32", isClient: true },
+      { text: "estamos recebendo em média 12 contatos por semana sem gastar nada em anúncio! 🎉", time: "14:32", isClient: true },
+    ],
+  },
+  {
+    name: "Ana B.", role: "Loja de Moda",
+    messages: [
+      { text: "Gente, esse mês fechamos mais de R$18 mil só pelo site! Isso nunca aconteceu antes 😱", time: "09:15", isClient: true },
+      { text: "Incrível! Fico muito feliz pelos seus resultados, Ana 🙏", time: "09:17", isClient: false },
+    ],
+  },
+  {
+    name: "João S.", role: "Clínica Odontológica",
+    messages: [
+      { text: "Em 2 meses triplicamos os agendamentos. Não consigo imaginar meu negócio sem vocês.", time: "18:45", isClient: true },
+    ],
+  },
+];
 
 /* ─────────────── Page ─────────────── */
 export default function Home() {
@@ -254,38 +357,39 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800 overflow-hidden">
-        {/* Background decorations */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
           <div className="absolute -top-40 -left-40 w-96 h-96 bg-yellow-400/8 rounded-full blur-3xl" />
           <div className="absolute -bottom-20 -right-20 w-[30rem] h-[30rem] bg-blue-400/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-3xl" />
-          {/* Subtle grid */}
           <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
         </div>
 
-        <div className="relative container py-20 lg:py-32">
+        <div className="relative container py-20 lg:py-36">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-3xl mx-auto text-center">
+
             <motion.div variants={fadeUp} className="flex justify-center mb-6">
               <span className="inline-flex items-center gap-2 bg-yellow-400/15 border border-yellow-400/30 text-yellow-300 font-sans text-xs sm:text-sm font-semibold px-5 py-2 rounded-full backdrop-blur-sm">
                 <Zap className="h-3.5 w-3.5 flex-shrink-0" /> +3.500 clientes conquistados em 9 anos
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.15] mb-6 tracking-tight">
-              Pare de perder clientes{" "}
-              <span className="text-yellow-400 relative">
-                todos os dias
-                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-yellow-400/40 rounded-full" />
+            {/* ── HEADLINE IMPACTANTE ── */}
+            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight">
+              Transformamos seu site em uma{" "}
+              <span className="relative inline-block">
+                <span className="text-yellow-400">máquina de gerar</span>
+                <svg className="absolute -bottom-2 left-0 w-full" height="6" viewBox="0 0 300 6" fill="none" preserveAspectRatio="none">
+                  <path d="M0 5 Q75 0 150 5 Q225 10 300 5" stroke="#FACC15" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                </svg>
               </span>{" "}
-              por não ter um site que vende.
+              clientes todos os dias.
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-base sm:text-lg lg:text-xl text-blue-200 font-sans leading-relaxed mb-4 max-w-2xl mx-auto">
               Criamos sites profissionais e estratégias digitais que geram clientes reais — não só visitas. Mais contatos, mais vendas, mais crescimento.
             </motion.p>
 
-            <motion.p variants={fadeUp} className="text-sm sm:text-base text-yellow-300/90 font-sans font-medium italic mb-8 max-w-xl mx-auto">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base text-yellow-300/90 font-sans font-medium italic mb-10 max-w-xl mx-auto">
               "Em 30 minutos de bate-papo, você pode mudar a história da sua empresa."
             </motion.p>
 
@@ -294,20 +398,20 @@ export default function Home() {
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-7 sm:px-8 py-4 rounded-full text-sm sm:text-base transition-all duration-300 shadow-xl shadow-yellow-500/20 hover:shadow-yellow-400/40 hover:scale-[1.03] flex items-center justify-center gap-2"
+                className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-7 sm:px-9 py-4 sm:py-5 rounded-full text-sm sm:text-base transition-all duration-300 shadow-2xl shadow-yellow-500/25 hover:shadow-yellow-400/40 hover:scale-[1.04] flex items-center justify-center gap-2"
               >
                 <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
                 Quero mais clientes agora
               </a>
               <button
                 onClick={scrollToForm}
-                className="border border-white/25 hover:border-white/50 text-white font-sans font-semibold px-7 sm:px-8 py-4 rounded-full text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 hover:bg-white/8 backdrop-blur-sm"
+                className="border border-white/25 hover:border-white/50 text-white font-sans font-semibold px-7 sm:px-9 py-4 sm:py-5 rounded-full text-sm sm:text-base transition-all duration-300 flex items-center justify-center gap-2 hover:bg-white/8 backdrop-blur-sm"
               >
-                Agendar sessão gratuita <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                Solicitar análise gratuita <ArrowRight className="h-4 w-4" />
               </button>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="mt-6 flex justify-center px-4 sm:px-0">
+            <motion.div variants={fadeUp} className="mt-7 flex justify-center px-4 sm:px-0">
               <ScarcityBadge />
             </motion.div>
 
@@ -327,13 +431,7 @@ export default function Home() {
       <section className="bg-blue-800 py-12 lg:py-16 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
         <div className="relative container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={vp}
-            variants={stagger}
-            className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {[
               { value: 3500, suffix: "+", label: "Clientes Conquistados" },
               { value: 9, suffix: " anos", label: "De Experiência" },
@@ -353,9 +451,7 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-72 h-72 bg-red-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
         <div className="container max-w-4xl mx-auto relative">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-12">
-            <motion.div variants={fadeIn}>
-              <SectionLabel>Diagnóstico</SectionLabel>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabel>Diagnóstico</SectionLabel></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 leading-tight max-w-3xl mx-auto">
               Se algum desses problemas parece familiar, então você{" "}
               <span className="font-extrabold underline decoration-yellow-400 decoration-2 underline-offset-2">PRECISA</span>{" "}
@@ -371,11 +467,7 @@ export default function Home() {
               "Depende demais da equipe comercial ou de networking",
               "Não sabe dizer se sua empresa vai crescer até o final do ano",
             ].map((problem) => (
-              <motion.div
-                key={problem}
-                variants={fadeUp}
-                className="flex items-start gap-3.5 bg-red-50 border border-red-100 rounded-2xl p-4 sm:p-5 hover:border-red-200 hover:shadow-sm transition-all duration-200"
-              >
+              <motion.div key={problem} variants={fadeUp} className="flex items-start gap-3.5 bg-red-50 border border-red-100 rounded-2xl p-4 sm:p-5 hover:border-red-200 hover:shadow-sm transition-all duration-200">
                 <span className="text-lg flex-shrink-0 mt-0.5">😞</span>
                 <p className="text-slate-700 font-sans text-sm sm:text-base leading-snug">{problem}</p>
               </motion.div>
@@ -384,12 +476,7 @@ export default function Home() {
 
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="text-center flex flex-col items-center gap-4">
             <ScarcityBadge />
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-green-500 hover:bg-green-400 text-white font-sans font-bold px-8 py-3.5 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-green-500/30 inline-flex items-center gap-2"
-            >
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-green-500 hover:bg-green-400 text-white font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-green-500/30 inline-flex items-center gap-2">
               <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Falar com a agência
             </a>
           </motion.div>
@@ -402,9 +489,7 @@ export default function Home() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
         <div className="container max-w-4xl mx-auto relative">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-12">
-            <motion.div variants={fadeIn}>
-              <SectionLabelLight>O que você recebe</SectionLabelLight>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabelLight>O que você recebe</SectionLabelLight></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
               O que você vai receber no diagnóstico...
             </motion.h2>
@@ -420,11 +505,7 @@ export default function Home() {
               "Plano para dominar mais espaço e crescer na internet",
               "Quais ajustes estruturais podem acelerar seus resultados",
             ].map((benefit) => (
-              <motion.div
-                key={benefit}
-                variants={fadeUp}
-                className="flex items-start gap-3.5 bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-              >
+              <motion.div key={benefit} variants={fadeUp} className="flex items-start gap-3.5 bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                 <div className="w-6 h-6 rounded-full bg-yellow-400/20 border border-yellow-400/40 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <CheckCircle className="h-3.5 w-3.5 text-yellow-400" />
                 </div>
@@ -437,10 +518,7 @@ export default function Home() {
             <p className="text-yellow-300/90 font-sans font-medium italic text-sm sm:text-base mb-6">
               "Em 30 minutos de bate-papo, você pode mudar a história da sua empresa."
             </p>
-            <button
-              onClick={scrollToForm}
-              className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-yellow-500/20 hover:shadow-yellow-400/30 inline-flex items-center gap-2"
-            >
+            <button onClick={scrollToForm} className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-yellow-500/20 hover:shadow-yellow-400/30 inline-flex items-center gap-2">
               Quero meu diagnóstico gratuito <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
           </motion.div>
@@ -452,9 +530,7 @@ export default function Home() {
       <section className="py-20 lg:py-28 bg-slate-50 relative overflow-hidden">
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-14">
-            <motion.div variants={fadeIn}>
-              <SectionLabel>Serviços</SectionLabel>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabel>Serviços</SectionLabel></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-4 leading-tight">
               O que você ganha trabalhando com a gente
             </motion.h2>
@@ -486,13 +562,40 @@ export default function Home() {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="text-center">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-yellow-400/30 inline-flex items-center gap-2"
-            >
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-yellow-400/30 inline-flex items-center gap-2">
               <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Quero mais clientes
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── PORTFÓLIO ── */}
+      <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
+        <div className="container relative">
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-14">
+            <motion.div variants={fadeIn}><SectionLabel>Portfólio</SectionLabel></motion.div>
+            <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-4 leading-tight">
+              Sites que geram clientes de verdade
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-slate-500 font-sans text-base sm:text-lg max-w-2xl mx-auto">
+              Projetos reais com resultados mensuráveis — cada site feito para converter visitantes em clientes.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={vp}
+            variants={{ hidden: {}, visible: {} }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
+          >
+            {PORTFOLIO.map((p) => <PortfolioCard key={p.title} {...p} />)}
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="text-center">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-blue-700 hover:bg-blue-600 text-white font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-blue-600/30 inline-flex items-center gap-2">
+              <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Quero um site assim para mim
             </a>
           </motion.div>
         </div>
@@ -526,12 +629,7 @@ export default function Home() {
               </ul>
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-col gap-3 items-center">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-blue-900 hover:bg-blue-800 text-white font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-xl inline-flex items-center gap-2 whitespace-nowrap"
-              >
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-blue-900 hover:bg-blue-800 text-white font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-xl inline-flex items-center gap-2 whitespace-nowrap">
                 <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Falar com a agência
               </a>
               <button onClick={scrollToForm} className="text-blue-900 font-sans text-sm underline hover:text-blue-700 transition-colors duration-200">
@@ -546,8 +644,8 @@ export default function Home() {
       </section>
 
       {/* ── QUEM SOMOS / CEO ── */}
-      <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
+      <section className="py-20 lg:py-28 bg-slate-50 relative overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-40 pointer-events-none" />
         <div className="container max-w-5xl mx-auto relative">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-14">
@@ -562,14 +660,8 @@ export default function Home() {
               <motion.div variants={fadeUp} className="flex flex-col items-center lg:items-start text-center lg:text-left">
                 <div className="relative mb-8">
                   <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-xl scale-110" />
-                  <img
-                    src="/ceo.jpg"
-                    alt="Giovanni Ballarin — CEO da Mestres do Site"
-                    className="relative w-44 h-44 rounded-full object-cover object-top shadow-2xl ring-4 ring-yellow-400/50"
-                  />
-                  <div className="absolute -bottom-3 -right-3 bg-yellow-400 rounded-full px-3 py-1 text-blue-900 text-xs font-black font-sans shadow-lg whitespace-nowrap">
-                    CEO & Fundador
-                  </div>
+                  <img src="/ceo.jpg" alt="Giovanni Ballarin — CEO da Mestres do Site" className="relative w-44 h-44 rounded-full object-cover object-top shadow-2xl ring-4 ring-yellow-400/50" />
+                  <div className="absolute -bottom-3 -right-3 bg-yellow-400 rounded-full px-3 py-1 text-blue-900 text-xs font-black font-sans shadow-lg whitespace-nowrap">CEO & Fundador</div>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-blue-900 mb-1">Giovanni Ballarin</h3>
                 <p className="text-blue-600 font-sans text-sm font-semibold mb-5">CEO da Mestres do Site · Especialista em Marketing Digital</p>
@@ -591,11 +683,7 @@ export default function Home() {
                   { icon: <Target className="h-6 w-6 text-green-500" />, title: "98%", desc: "de satisfação dos clientes atendidos" },
                   { icon: <Globe className="h-6 w-6 text-purple-500" />, title: "+150", desc: "sites profissionais lançados por ano" },
                 ].map((item) => (
-                  <motion.div
-                    key={item.title}
-                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                    className="bg-blue-50 border border-blue-100 rounded-2xl p-5 flex flex-col gap-2 hover:shadow-md hover:border-blue-200 transition-all duration-300"
-                  >
+                  <motion.div key={item.title} whileHover={{ y: -4, transition: { duration: 0.2 } }} className="bg-white border border-blue-100 rounded-2xl p-5 flex flex-col gap-2 hover:shadow-md hover:border-blue-200 transition-all duration-300">
                     {item.icon}
                     <p className="text-2xl font-black text-blue-900">{item.title}</p>
                     <p className="text-slate-500 font-sans text-xs leading-snug">{item.desc}</p>
@@ -617,59 +705,56 @@ export default function Home() {
       </section>
 
       {/* ── DEPOIMENTOS ── */}
-      <section className="py-20 lg:py-28 bg-slate-50 relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-14">
-            <motion.div variants={fadeIn}>
-              <SectionLabel>Resultados reais</SectionLabel>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabel>Prova social</SectionLabel></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-4 leading-tight">
               Empresários que pararam de perder clientes
             </motion.h2>
             <motion.p variants={fadeUp} className="text-slate-500 font-sans text-base sm:text-lg">Resultados reais de quem confiou na Mestres do Site.</motion.p>
           </motion.div>
 
+          {/* ── WhatsApp prints ── */}
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="grid sm:grid-cols-3 gap-4 mb-14 max-w-4xl mx-auto">
+            {WA_CHATS.map((chat) => (
+              <motion.div key={chat.name} variants={fadeUp} className="bg-slate-100 rounded-2xl overflow-hidden shadow-md">
+                {/* WA header */}
+                <div className="bg-green-600 px-4 py-3 flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center text-white font-black text-sm flex-shrink-0">{chat.name[0]}</div>
+                  <div className="min-w-0">
+                    <p className="text-white font-bold text-sm truncate">{chat.name}</p>
+                    <p className="text-green-200 text-xs truncate">{chat.role}</p>
+                  </div>
+                  <FaWhatsapp className="h-4 w-4 text-green-300 ml-auto flex-shrink-0" />
+                </div>
+                {/* Messages */}
+                <div className="bg-[#e5ddd5] p-3 flex flex-col gap-2 min-h-[100px]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4b5a0' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}>
+                  {chat.messages.map((msg, i) => <WaBubble key={i} {...msg} />)}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Written testimonials */}
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
             {[
-              {
-                name: "João Silva", city: "São Paulo, SP", role: "Clínica Odontológica", result: "+40 agendamentos/mês",
-                text: "Depois que refiz meu site com a Mestres do Site, comecei a receber clientes toda semana pelo Google. Em 2 meses, triplicamos os agendamentos. Não consigo imaginar meu negócio sem eles.",
-              },
-              {
-                name: "Ana Beatriz Lima", city: "Belo Horizonte, MG", role: "Loja de Moda Feminina", result: "+R$18k em vendas/mês",
-                text: "Passei de 3 vendas por semana para mais de 15. As campanhas de tráfego pago foram um divisor de águas para minha loja. O ROI é impressionante — para cada R$1 investido, tenho R$8 de retorno.",
-              },
-              {
-                name: "Carlos Mendonça", city: "Curitiba, PR", role: "Escritório de Contabilidade", result: "Primeira página do Google",
-                text: "Em 3 meses aparecemos na primeira página do Google para nosso segmento. Hoje recebo em média 12 contatos por semana sem gastar nada em anúncios. O SEO faz o trabalho por mim.",
-              },
-              {
-                name: "Fernanda Costa", city: "Rio de Janeiro, RJ", role: "Consultora de Imagem", result: "+25 novos clientes/mês",
-                text: "Nunca pensei que um site pudesse mudar tanto meu negócio. Antes dependia só de indicação. Hoje tenho um fluxo constante de clientes chegando todo mês — e continua crescendo.",
-              },
+              { name: "João Silva", city: "São Paulo, SP", role: "Clínica Odontológica", result: "+40 agendamentos/mês", text: "Depois que refiz meu site com a Mestres do Site, comecei a receber clientes toda semana pelo Google. Em 2 meses, triplicamos os agendamentos. Não consigo imaginar meu negócio sem eles." },
+              { name: "Ana Beatriz Lima", city: "Belo Horizonte, MG", role: "Loja de Moda Feminina", result: "+R$18k em vendas/mês", text: "Passei de 3 vendas por semana para mais de 15. As campanhas de tráfego pago foram um divisor de águas para minha loja. O ROI é impressionante — para cada R$1 investido, tenho R$8 de retorno." },
+              { name: "Carlos Mendonça", city: "Curitiba, PR", role: "Escritório de Contabilidade", result: "Primeira página do Google", text: "Em 3 meses aparecemos na primeira página do Google para nosso segmento. Hoje recebo em média 12 contatos por semana sem gastar nada em anúncios. O SEO faz o trabalho por mim." },
+              { name: "Fernanda Costa", city: "Rio de Janeiro, RJ", role: "Consultora de Imagem", result: "+25 novos clientes/mês", text: "Nunca pensei que um site pudesse mudar tanto meu negócio. Antes dependia só de indicação. Hoje tenho um fluxo constante de clientes chegando todo mês — e continua crescendo." },
             ].map((t) => (
-              <motion.div
-                key={t.name}
-                variants={fadeUp}
-                whileHover={{ y: -6, transition: { duration: 0.25, ease } }}
-                className="group bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 cursor-default"
-              >
+              <motion.div key={t.name} variants={fadeUp} whileHover={{ y: -6, transition: { duration: 0.25, ease } }} className="group bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 cursor-default">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />)}
-                  </div>
+                  <div className="flex gap-0.5">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />)}</div>
                   <span className="bg-green-100 text-green-700 text-xs font-bold font-sans px-3 py-1 rounded-full">{t.result}</span>
                 </div>
                 <p className="text-slate-600 font-sans text-sm leading-relaxed mb-5">"{t.text}"</p>
                 <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-black text-sm flex-shrink-0">
-                    {t.name[0]}
-                  </div>
+                  <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-black text-sm flex-shrink-0">{t.name[0]}</div>
                   <div>
                     <p className="font-bold text-blue-900 text-sm">{t.name}</p>
-                    <div className="flex items-center gap-1.5 text-slate-400 font-sans text-xs">
-                      <MapPin className="h-3 w-3" /> {t.city} · {t.role}
-                    </div>
+                    <div className="flex items-center gap-1.5 text-slate-400 font-sans text-xs"><MapPin className="h-3 w-3" /> {t.city} · {t.role}</div>
                   </div>
                 </div>
               </motion.div>
@@ -677,12 +762,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={fadeUp} className="text-center mt-12">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-yellow-400/30 inline-flex items-center gap-2"
-            >
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 py-4 rounded-full transition-all duration-300 hover:scale-[1.03] shadow-lg hover:shadow-yellow-400/30 inline-flex items-center gap-2">
               <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Quero ser o próximo caso de sucesso
             </a>
           </motion.div>
@@ -690,44 +770,27 @@ export default function Home() {
       </section>
 
       {/* ── QUEBRA DE OBJEÇÃO ── */}
-      <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
+      <section className="py-20 lg:py-28 bg-slate-50 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-70 pointer-events-none" />
         <div className="container max-w-3xl mx-auto relative">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-12">
               <SectionLabel>Antes de continuar</SectionLabel>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 leading-tight">
-                Mas atenção...
-              </h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 leading-tight">Mas atenção...</h2>
             </motion.div>
-
             <motion.div variants={stagger} className="grid sm:grid-cols-2 gap-4 mb-5">
-              {[
-                { label: "Não é aula" },
-                { label: "Não é apresentação comercial" },
-              ].map((item) => (
-                <motion.div
-                  key={item.label}
-                  variants={fadeUp}
-                  className="flex items-center gap-4 bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm"
-                >
-                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                    <XCircle className="h-5 w-5 text-red-500" />
-                  </div>
+              {[{ label: "Não é aula" }, { label: "Não é apresentação comercial" }].map((item) => (
+                <motion.div key={item.label} variants={fadeUp} className="flex items-center gap-4 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0"><XCircle className="h-5 w-5 text-red-500" /></div>
                   <p className="text-slate-700 font-sans font-semibold text-base">{item.label}</p>
                 </motion.div>
               ))}
             </motion.div>
-
             <motion.div variants={fadeUp} className="flex items-center gap-5 bg-blue-900 rounded-2xl p-6 sm:p-7 shadow-xl shadow-blue-900/20">
-              <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                <CheckCircle2 className="h-6 w-6 text-blue-900" />
-              </div>
+              <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg"><CheckCircle2 className="h-6 w-6 text-blue-900" /></div>
               <div className="text-left">
                 <p className="text-yellow-400 font-sans text-xs font-bold uppercase tracking-widest mb-1">O que é de verdade</p>
-                <p className="text-white font-sans font-bold text-base sm:text-lg leading-snug">
-                  É uma conversa estratégica focada na sua realidade
-                </p>
+                <p className="text-white font-sans font-bold text-base sm:text-lg leading-snug">É uma conversa estratégica focada na sua realidade</p>
               </div>
             </motion.div>
           </motion.div>
@@ -743,35 +806,22 @@ export default function Home() {
         </div>
         <div className="container max-w-3xl mx-auto text-center relative">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger}>
-            <motion.div variants={fadeIn}>
-              <SectionLabelLight>Próximo passo</SectionLabelLight>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabelLight>Próximo passo</SectionLabelLight></motion.div>
             <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight tracking-tight">
-              Agende esse negócio{" "}
-              <span className="text-yellow-400">agora</span>
+              Agende esse negócio{" "}<span className="text-yellow-400">agora</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-blue-200 font-sans text-base sm:text-lg mb-10 italic max-w-xl mx-auto">
               "Em 30 minutos de bate-papo, você pode mudar a história da sua empresa."
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 px-4 sm:px-0">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-green-500 hover:bg-green-400 text-white font-sans font-black px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-green-500/20 hover:shadow-green-400/30 inline-flex items-center justify-center gap-2"
-              >
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group bg-green-500 hover:bg-green-400 text-white font-sans font-black px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-green-500/20 hover:shadow-green-400/30 inline-flex items-center justify-center gap-2">
                 <FaWhatsapp className="h-5 sm:h-6 w-5 sm:w-6 transition-transform duration-200 group-hover:scale-110" /> Falar com a agência agora
               </a>
-              <button
-                onClick={scrollToForm}
-                className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-yellow-500/20 hover:shadow-yellow-400/30 inline-flex items-center justify-center gap-2"
-              >
+              <button onClick={scrollToForm} className="group bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-sans font-black px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-yellow-500/20 hover:shadow-yellow-400/30 inline-flex items-center justify-center gap-2">
                 Garantir minha vaga <ArrowRight className="h-5 sm:h-6 w-5 sm:w-6 transition-transform duration-200 group-hover:translate-x-0.5" />
               </button>
             </motion.div>
-            <motion.div variants={fadeUp} className="flex justify-center">
-              <ScarcityBadge />
-            </motion.div>
+            <motion.div variants={fadeUp} className="flex justify-center"><ScarcityBadge /></motion.div>
           </motion.div>
         </div>
       </section>
@@ -803,13 +853,9 @@ export default function Home() {
       <section className="py-16 lg:py-20 bg-white relative overflow-hidden">
         <div className="container max-w-3xl mx-auto text-center">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger}>
-            <motion.div variants={fadeIn}>
-              <SectionLabel>Sem risco</SectionLabel>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabel>Sem risco</SectionLabel></motion.div>
             <motion.div variants={fadeUp}>
-              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-                <Shield className="h-8 w-8 text-blue-600" />
-              </div>
+              <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><Shield className="h-8 w-8 text-blue-600" /></div>
               <h2 className="text-2xl sm:text-3xl font-black text-blue-900 mb-4">Risco zero para você</h2>
               <p className="text-slate-500 font-sans leading-relaxed text-base sm:text-lg mb-8 max-w-xl mx-auto">
                 Se você não ficar 100% satisfeito nos primeiros 30 dias, devolvemos todo o seu investimento. Sem perguntas, sem burocracia. Resultado ou dinheiro de volta — simples assim.
@@ -826,9 +872,7 @@ export default function Home() {
       <section className="py-20 lg:py-28 bg-slate-50">
         <div className="container max-w-3xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger}>
-            <motion.div variants={fadeIn} className="text-center">
-              <SectionLabel>Dúvidas</SectionLabel>
-            </motion.div>
+            <motion.div variants={fadeIn} className="text-center"><SectionLabel>Dúvidas</SectionLabel></motion.div>
             <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-900 mb-2 text-center leading-tight">Perguntas Frequentes</motion.h2>
             <motion.p variants={fadeUp} className="text-slate-500 font-sans text-center mb-10 text-sm sm:text-base">Tire suas dúvidas agora e dê o primeiro passo.</motion.p>
             <motion.div variants={stagger} className="space-y-3">
@@ -853,36 +897,20 @@ export default function Home() {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
         <div className="container max-w-2xl mx-auto relative">
           <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger} className="text-center mb-10">
-            <motion.div variants={fadeIn}>
-              <SectionLabelLight>Análise gratuita</SectionLabelLight>
-            </motion.div>
+            <motion.div variants={fadeIn}><SectionLabelLight>Análise gratuita</SectionLabelLight></motion.div>
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-yellow-400/15 border border-yellow-400/25 text-yellow-300 font-sans text-xs sm:text-sm px-4 py-1.5 rounded-full mb-5">
               <Clock className="h-3.5 w-3.5" /> Oferta encerra em {countdown.h}:{countdown.m}:{countdown.s}
             </motion.div>
-            <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">
-              Peça sua análise gratuita agora
-            </motion.h2>
-            <motion.p variants={fadeUp} className="text-blue-200 font-sans text-sm sm:text-base">
-              Preencha e entraremos em contato em até 24 horas — ou fale direto no WhatsApp.
-            </motion.p>
-            <motion.div variants={fadeUp} className="mt-5 flex justify-center">
-              <ScarcityBadge />
-            </motion.div>
+            <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-4 leading-tight">Peça sua análise gratuita agora</motion.h2>
+            <motion.p variants={fadeUp} className="text-blue-200 font-sans text-sm sm:text-base">Preencha e entraremos em contato em até 24 horas — ou fale direto no WhatsApp.</motion.p>
+            <motion.div variants={fadeUp} className="mt-5 flex justify-center"><ScarcityBadge /></motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={vp}
-            transition={{ duration: 0.7, ease }}
-            className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl shadow-blue-950/40"
-          >
+          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp} transition={{ duration: 0.7, ease }} className="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl shadow-blue-950/40">
             <AnimatePresence mode="wait">
               {formSuccess ? (
                 <motion.div key="success" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4, ease }} className="text-center py-10">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="h-8 w-8 text-green-500" />
-                  </div>
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><CheckCircle className="h-8 w-8 text-green-500" /></div>
                   <h3 className="text-xl sm:text-2xl font-black text-blue-900 mb-2">Recebemos sua solicitação!</h3>
                   <p className="text-slate-500 font-sans mb-7 text-sm sm:text-base">Nossa equipe entrará em contato em até 24 horas. Para resposta imediata, nos chame no WhatsApp.</p>
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 bg-green-500 hover:bg-green-400 text-white font-sans font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-green-500/30">
@@ -903,7 +931,6 @@ export default function Home() {
                       {errors.email && <p className="text-red-500 text-xs mt-1 font-sans">{errors.email.message}</p>}
                     </div>
                   </div>
-
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs sm:text-sm font-semibold text-blue-900 mb-1.5 font-sans">WhatsApp *</label>
@@ -915,39 +942,79 @@ export default function Home() {
                       <input {...register("empresa")} placeholder="Nome da sua empresa" className="w-full border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
                     </div>
                   </div>
-
                   <div>
                     <label className="block text-xs sm:text-sm font-semibold text-blue-900 mb-1.5 font-sans">Cargo / Função</label>
                     <input {...register("cargo")} placeholder="Ex: CEO, Proprietário, Diretor..." className="w-full border border-slate-200 rounded-xl px-4 py-3 font-sans text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
                   </div>
-
-                  {submitLead.isError && (
-                    <p className="text-red-500 text-sm font-sans bg-red-50 rounded-xl p-3">Ocorreu um erro. Tente novamente ou nos chame no WhatsApp.</p>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={submitLead.isPending}
-                    className="w-full bg-blue-700 hover:bg-blue-600 disabled:opacity-60 text-white font-sans font-black py-4 rounded-full text-sm sm:text-base transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-600/30"
-                  >
+                  {submitLead.isError && <p className="text-red-500 text-sm font-sans bg-red-50 rounded-xl p-3">Ocorreu um erro. Tente novamente ou nos chame no WhatsApp.</p>}
+                  <button type="submit" disabled={submitLead.isPending} className="w-full bg-blue-700 hover:bg-blue-600 disabled:opacity-60 text-white font-sans font-black py-4 rounded-full text-sm sm:text-base transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-600/30">
                     {submitLead.isPending ? "Enviando..." : "Quero minha análise gratuita"}
                     {!submitLead.isPending && <ArrowRight className="h-5 w-5" />}
                   </button>
-
                   <div className="relative flex items-center gap-3 py-1">
                     <div className="h-px bg-slate-200 flex-1" />
                     <span className="text-slate-400 font-sans text-xs">ou resposta imediata pelo</span>
                     <div className="h-px bg-slate-200 flex-1" />
                   </div>
-
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="group w-full bg-green-500 hover:bg-green-400 text-white font-sans font-black py-4 rounded-full text-sm sm:text-base transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg hover:shadow-green-500/30">
                     <FaWhatsapp className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" /> Falar com a agência agora
                   </a>
-
                   <p className="text-center text-slate-400 font-sans text-xs pt-1">Seus dados estão seguros. Não enviamos spam.</p>
                 </motion.form>
               )}
             </AnimatePresence>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── FECHAMENTO FORTE ── */}
+      <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-blue-50 rounded-full blur-3xl opacity-50" />
+        </div>
+        <div className="container max-w-3xl mx-auto text-center relative">
+          <motion.div initial="hidden" whileInView="visible" viewport={vp} variants={stagger}>
+            <motion.div variants={fadeIn}>
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-yellow-400 rounded-2xl mb-7 mx-auto shadow-xl shadow-yellow-400/30">
+                <Rocket className="h-8 w-8 text-blue-900" />
+              </div>
+            </motion.div>
+            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl lg:text-5xl font-black text-blue-900 mb-6 leading-tight">
+              Pronto para ter um site que{" "}
+              <span className="relative">
+                <span className="text-blue-600">realmente gera clientes</span>
+                <svg className="absolute -bottom-1 left-0 w-full" height="5" viewBox="0 0 300 5" fill="none" preserveAspectRatio="none">
+                  <path d="M0 4 Q75 0 150 4 Q225 8 300 4" stroke="#2563eb" strokeWidth="2" fill="none" strokeLinecap="round" />
+                </svg>
+              </span>?
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-slate-500 font-sans text-base sm:text-xl leading-relaxed mb-10 max-w-xl mx-auto">
+              Cada dia sem um site profissional é um dia perdendo clientes para o concorrente. Dê o próximo passo agora — é gratuito e sem compromisso.
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center mb-8 px-4 sm:px-0">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-green-500 hover:bg-green-400 text-white font-sans font-black px-9 py-5 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.04] shadow-2xl shadow-green-500/25 hover:shadow-green-400/40 inline-flex items-center justify-center gap-2"
+              >
+                <FaWhatsapp className="h-6 w-6 transition-transform duration-200 group-hover:scale-110" />
+                Falar no WhatsApp agora
+              </a>
+              <button
+                onClick={scrollToForm}
+                className="group bg-blue-900 hover:bg-blue-800 text-white font-sans font-black px-9 py-5 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.04] shadow-xl hover:shadow-blue-900/30 inline-flex items-center justify-center gap-2"
+              >
+                Solicitar análise gratuita <ArrowRight className="h-6 w-6 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </button>
+            </motion.div>
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-6 text-slate-400 font-sans text-xs sm:text-sm">
+              {["100% gratuito", "Sem compromisso", "Resposta em até 24h"].map((item) => (
+                <span key={item} className="flex items-center gap-1.5">
+                  <CheckCircle className="h-3.5 w-3.5 text-green-500 flex-shrink-0" /> {item}
+                </span>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -958,9 +1025,7 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-10">
             <div>
               <Logo className="mb-4" />
-              <p className="text-blue-400 font-sans text-sm leading-relaxed">
-                Transformando negócios brasileiros com presença digital que realmente vende.
-              </p>
+              <p className="text-blue-400 font-sans text-sm leading-relaxed">Transformando negócios brasileiros com presença digital que realmente vende.</p>
               <a href="https://www.instagram.com/mestresdosite" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-4 text-blue-400 hover:text-white font-sans text-sm transition-colors duration-200">
                 <Instagram className="h-4 w-4" /> @mestresdosite
               </a>

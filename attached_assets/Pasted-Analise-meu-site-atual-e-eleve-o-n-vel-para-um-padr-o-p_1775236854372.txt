@@ -1,0 +1,104 @@
+Analise meu site atual e eleve o nível para um padrão premium de agência, com aparência profissional, forte autoridade e alto poder de conversão, mantendo a base já existente.
+
+OBJETIVO:
+Transformar o site em algo que justifique um valor alto (R$2.500), transmitindo confiança imediata, design moderno e foco em geração de clientes.
+
+REGRAS IMPORTANTES:
+- NÃO recriar o site do zero
+- NÃO mudar completamente a estrutura
+- NÃO alterar identidade principal (cores e base)
+- Apenas melhorar textos, design, autoridade e experiência
+
+MELHORIAS OBRIGATÓRIAS:
+
+1. HEADLINE (TOPO DO SITE - MUITO IMPORTANTE)
+- Criar uma frase forte, direta e focada em resultado
+- Deve causar impacto imediato
+
+Exemplo de referência:
+“Transformamos seu site em uma máquina de gerar clientes todos os dias”
+
+- Aumentar tamanho do título
+- Dar mais destaque visual
+
+2. SUBTÍTULO
+- Explicar de forma clara o que você faz
+- Linguagem simples e profissional
+
+3. CTA (BOTÃO)
+- Destacar muito mais o botão principal
+- Usar frases mais fortes:
+  “Quero mais clientes”
+  “Solicitar orçamento”
+  “Falar no WhatsApp agora”
+
+- Repetir CTA ao longo do site
+
+4. PROVA SOCIAL (AUTORIDADE - ESSENCIAL)
+- Criar uma seção forte com:
+  - Depoimentos de clientes (mesmo simulados)
+  - Frases reais e naturais
+  - Nome e tipo de negócio
+
+- Adicionar:
+  - Indicador como “+10 clientes atendidos”
+  - Simulação visual de prints de WhatsApp
+
+- Destacar visualmente essa seção
+
+5. PORTFÓLIO (MUITO IMPORTANTE)
+- Melhorar apresentação dos projetos
+- Layout em grid moderno
+- Adicionar efeito ao passar o mouse (hover)
+- Destacar mais essa parte
+
+6. DESIGN PREMIUM
+- Aumentar espaçamento entre seções (mais “respiro”)
+- Melhorar alinhamento geral
+- Criar hierarquia visual mais clara
+- Deixar aparência mais limpa e sofisticada
+
+7. TIPOGRAFIA
+- Títulos maiores, fortes e bem destacados
+- Textos mais leves e organizados
+- Melhor leitura geral
+
+8. ANIMAÇÕES (REFINAMENTO)
+- Melhorar suavidade das animações
+- Aplicar efeito de entrada ao rolar (fade + leve movimento)
+- Criar efeito em sequência (cascata)
+- Deixar mais fluido e natural (estilo agência premium)
+
+9. ELEMENTOS VISUAIS
+- Adicionar detalhes sutis (linhas, divisores, destaques)
+- Melhorar aparência dos blocos e seções
+
+10. MOBILE (NÍVEL PREMIUM)
+- Garantir que o mobile tenha o mesmo nível do desktop
+- Corrigir:
+  - textos quebrados
+  - espaçamentos ruins
+  - fontes desproporcionais
+
+- Melhorar:
+  - leitura
+  - organização
+  - experiência geral
+
+- Mobile deve parecer versão profissional, não adaptada
+
+11. EXPERIÊNCIA DO USUÁRIO
+- Tornar navegação simples e fluida
+- Evitar excesso de informação
+- Guiar o usuário até o contato
+
+12. FINAL (FECHAMENTO FORTE)
+- Criar uma última seção com chamada forte:
+
+Exemplo:
+“Pronto para ter um site que realmente gera clientes?”
+
+- Botão grande logo abaixo
+
+RESULTADO FINAL:
+O site deve parecer de uma agência profissional de alto nível, com design moderno, forte autoridade e foco em conversão, transmitindo confiança imediata e justificando um valor alto pelo serviço.
