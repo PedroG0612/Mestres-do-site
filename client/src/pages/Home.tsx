@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FaWhatsapp } from "react-icons/fa";
 import { trpc } from "@/lib/trpc";
-import logoImg from "@assets/image_1775233079551.png";
+import logoImg from "@assets/image_1775233984544.png";
 import {
   CheckCircle,
   CheckCircle2,
