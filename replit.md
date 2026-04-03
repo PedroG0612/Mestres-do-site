@@ -60,3 +60,9 @@ pnpm run start # Production server
 - **Build**: `pnpm run build`
 - **Run**: `node dist/index.js`
 - **Port**: 5000
+
+## Replit Migration Notes
+
+- The `dev` script uses `npx tsx` to ensure `tsx` is resolved via `node_modules/.bin` in the Replit shell environment
+- The workflow "Start application" runs `npm run dev` on port 5000 with webview output
+- Missing env vars (`OAUTH_SERVER_URL`, `VITE_ANALYTICS_ENDPOINT`, `VITE_ANALYTICS_WEBSITE_ID`) produce warnings but the app runs without them — add them via Replit Secrets for full functionality
