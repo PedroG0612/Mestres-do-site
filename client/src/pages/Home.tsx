@@ -248,7 +248,7 @@ const PORTFOLIO = [
 export default function Home() {
   const [formSuccess, setFormSuccess] = useState(false);
   const formRef = useRef<HTMLElement>(null);
-  const countdown = useCountdown(0.5);
+  const countdown = useCountdown(1);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<LeadForm>({ resolver: zodResolver(leadSchema) });
   const submitLead = trpc.leads.submit.useMutation({
