@@ -5,6 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FaWhatsapp } from "react-icons/fa";
 import { trpc } from "@/lib/trpc";
+import resultImg1 from "@assets/image_1775239826558.png";
+import resultImg2 from "@assets/image_1775239829147.png";
+import resultImg3 from "@assets/download_1775239851563.png";
+import resultImg4 from "@assets/download_1775239854138.png";
 import {
   CheckCircle,
   CheckCircle2,
@@ -29,7 +33,6 @@ import {
   MapPin,
   Quote,
   AlertTriangle,
-  ExternalLink,
   Sparkles,
   Rocket,
 } from "lucide-react";
@@ -178,9 +181,9 @@ function SectionLabelLight({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* Portfolio card */
-function PortfolioCard({ gradient, category, title, result, index }: {
-  gradient: string; category: string; title: string; result: string; index: number;
+/* Portfolio card — real result image */
+function PortfolioCard({ image, category, title, result, index }: {
+  image: string; category: string; title: string; result: string; index: number;
 }) {
   return (
     <motion.div
@@ -188,40 +191,19 @@ function PortfolioCard({ gradient, category, title, result, index }: {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.07 } },
       }}
-      className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-shadow duration-500"
+      className="group relative rounded-2xl overflow-hidden cursor-default shadow-md hover:shadow-2xl transition-shadow duration-500 flex flex-col"
     >
-      {/* Mock screenshot */}
-      <div className={`${gradient} h-52 sm:h-56 relative overflow-hidden`}>
-        {/* Browser chrome mockup */}
-        <div className="absolute top-0 left-0 right-0 bg-black/30 backdrop-blur-sm px-3 py-2 flex items-center gap-2">
-          <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
-            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
-            <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
-          </div>
-          <div className="flex-1 bg-white/20 rounded-full h-4 mx-2" />
-        </div>
-        {/* Fake page content lines */}
-        <div className="absolute inset-0 pt-12 px-5 flex flex-col gap-2.5 opacity-30">
-          <div className="h-5 bg-white/60 rounded-full w-3/4" />
-          <div className="h-3 bg-white/40 rounded-full w-full" />
-          <div className="h-3 bg-white/40 rounded-full w-5/6" />
-          <div className="h-3 bg-white/40 rounded-full w-4/6" />
-          <div className="h-8 bg-white/70 rounded-xl w-1/3 mt-2" />
-          <div className="grid grid-cols-3 gap-2 mt-2">
-            <div className="h-12 bg-white/30 rounded-xl" />
-            <div className="h-12 bg-white/30 rounded-xl" />
-            <div className="h-12 bg-white/30 rounded-xl" />
-          </div>
-        </div>
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-blue-900/80 opacity-0 group-hover:opacity-100 transition-all duration-400 flex flex-col items-center justify-center gap-3">
-          <ExternalLink className="h-8 w-8 text-white/80" />
-          <span className="text-white font-bold text-sm tracking-wide">Ver projeto</span>
-        </div>
+      {/* Real result screenshot */}
+      <div className="relative overflow-hidden bg-slate-900" style={{ height: "340px" }}>
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 via-transparent to-transparent" />
       </div>
       {/* Card info */}
-      <div className="bg-white p-4 border-t border-slate-100">
+      <div className="bg-white p-4 border-t border-slate-100 flex-1">
         <div className="flex items-center justify-between mb-1">
           <span className="text-blue-600 font-sans text-xs font-semibold uppercase tracking-wider">{category}</span>
           <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded-full">{result}</span>
@@ -256,12 +238,10 @@ const vp = { once: true, margin: "-60px" } as const;
 
 /* ─────────────── Portfolio data ─────────────── */
 const PORTFOLIO = [
-  { gradient: "bg-gradient-to-br from-blue-600 to-indigo-800", category: "Marketing Digital + SEO", title: "Clínica Odontológica — Dra. Patrícia Luz", result: "+3x agendamentos", index: 0 },
-  { gradient: "bg-gradient-to-br from-emerald-500 to-teal-700", category: "Geração de Leads", title: "Consultoria Financeira — Capital Crescer", result: "+220 leads/mês", index: 1 },
-  { gradient: "bg-gradient-to-br from-orange-500 to-rose-700", category: "Estratégia de Vendas", title: "Loja de Moda Feminina — Belle Fashion", result: "+R$18k/mês em vendas", index: 2 },
-  { gradient: "bg-gradient-to-br from-violet-600 to-purple-800", category: "Tráfego Pago + SEO", title: "Escritório de Contabilidade — ContaFlex", result: "ROAS 8.45 · 1ª página Google", index: 3 },
-  { gradient: "bg-gradient-to-br from-cyan-500 to-blue-700", category: "Crescimento Orgânico", title: "Escola de Idiomas — FluenTalk", result: "+85 matrículas em 60 dias", index: 4 },
-  { gradient: "bg-gradient-to-br from-amber-500 to-orange-700", category: "Marketing + Ads", title: "Imobiliária — Prime Imóveis", result: "+40 contatos qualificados/mês", index: 5 },
+  { image: resultImg1, category: "E-commerce + Live Commerce", title: "R$119.203 em pedidos — 3º mês consecutivo de crescimento", result: "Aumento de 22% nas vendas", index: 0 },
+  { image: resultImg2, category: "Gestão de Leads", title: "Assumimos o atendimento dos leads e fechamos o 1º agendamento na semana", result: "De 0 vendas para crescimento", index: 1 },
+  { image: resultImg3, category: "Marketing para E-commerce", title: "Meta de agosto batida — visão geral da loja em crescimento constante", result: "Meta mensal atingida", index: 2 },
+  { image: resultImg4, category: "Tráfego Pago + Redes Sociais", title: "ROAS 8.45 · R$34.288 de receita bruta — aumento de 30/40% na receita", result: "ROAS 8.45 em novembro", index: 3 },
 ];
 
 /* ─────────────── Page ─────────────── */
@@ -552,7 +532,7 @@ export default function Home() {
             whileInView="visible"
             viewport={vp}
             variants={{ hidden: {}, visible: {} }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12"
+            className="grid sm:grid-cols-2 gap-5 mb-12 max-w-4xl mx-auto"
           >
             {PORTFOLIO.map((p) => <PortfolioCard key={p.title} {...p} />)}
           </motion.div>
@@ -688,7 +668,7 @@ export default function Home() {
               <iframe
                 src="https://www.youtube.com/embed/F_8cI9n08DU?rel=0&modestbranding=1"
                 title="Mestres do Site — Como geramos clientes e crescimento real"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
                 style={{ border: "none" }}
