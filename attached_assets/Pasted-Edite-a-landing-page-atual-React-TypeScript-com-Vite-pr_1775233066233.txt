@@ -1,0 +1,111 @@
+Edite a landing page atual (React + TypeScript com Vite), principalmente o arquivo Home.tsx, com foco em aumentar conversão e urgência, sem recriar o projeto.
+
+⚠️ Regras importantes:
+
+NÃO recrie o projeto
+NÃO quebre a estrutura existente
+Apenas edite e melhore o código atual
+Mantenha o design base (azul e amarelo)
+NÃO mudar layout drasticamente, apenas melhorar conteúdo e comportamento
+🧩 IMPLEMENTAÇÕES
+1. ⏱️ CONTADOR FIXO (IMPORTANTE)
+Fazer o contador de tempo acompanhar o scroll
+Ele deve ficar fixo no topo da tela (position: fixed) mesmo quando o usuário desce
+Manter funcionando em tempo real
+2. 🟢 CTA (TEXTO)
+Substituir todos os textos:
+
+❌ “Falar com Giovanni”
+✅ “Falar com a agência”
+
+3. 🔥 ESCASSEZ (VAGAS)
+
+Adicionar informação de vagas disponíveis em pontos estratégicos:
+
+Total: 220 vagas
+Disponíveis: 9 vagas
+
+Exibir em locais como:
+
+Próximo ao CTA
+Seção de oferta
+Final da página
+
+Exemplo:
+👉 “Apenas 9 de 220 vagas disponíveis”
+
+4. 💬 PROMESSA FORTE
+
+Adicionar texto em destaque:
+
+“Em 30 minutos de bate-papo, você pode mudar a história da sua empresa.”
+
+Colocar:
+
+Próximo ao CTA principal
+Ou na seção de oferta
+5. ⚠️ SEÇÃO DE PROBLEMAS (MANTER DESIGN)
+
+Substituir o conteúdo atual pelos textos abaixo, sem mudar o layout:
+
+Texto topo:
+“Se algum desses problemas parece familiar, então você PRECISA desse diagnóstico!”
+
+Lista:
+😞 Depende de indicações que nunca têm previsibilidade
+😞 Já investe em marketing mas o resultado é bem abaixo do esperado
+😞 Não tem clareza dos dados de investimento e retorno
+😞 Depende demais da equipe comercial ou de networking
+😞 Não sabe dizer se sua empresa vai crescer até o final do ano
+
+6. 🎯 BENEFÍCIOS (NOVA SEÇÃO OU ABAIXO)
+
+Adicionar uma nova seção:
+
+Título:
+“O que você vai receber no diagnóstico...”
+
+Descrição:
+“Em apenas uma sessão, vamos mapear os pontos críticos de crescimento e mostrar com clareza onde estão os gargalos.”
+
+Lista:
+✅ Descobrir o potencial máximo do seu mercado no digital
+✅ Saber quanto desse mercado você pode dominar com o que já faz hoje
+✅ Plano para dominar mais espaço e crescer na internet
+✅ Quais ajustes estruturais podem acelerar seus resultados
+
+7. 🚫 QUEBRA DE OBJEÇÃO
+
+Adicionar seção com:
+
+Texto:
+“Mas atenção...”
+
+🔴 Não é aula
+🔴 Não é apresentação comercial
+
+🟢 É uma conversa estratégica focada na sua realidade
+
+8. 📣 CTA FINAL
+
+Logo após a seção acima, adicionar:
+
+Texto grande:
+“Agende esse negócio agora”
+
+Adicionar botão CTA forte abaixo
+Reforçar novamente:
+👉 “Apenas 9 vagas disponíveis de 220”
+9. 🟡 LOGO
+Substituir a logo atual pela imagem anexada
+Ajustar tamanho para caber corretamente no header
+Manter alinhamento com o layout
+🎯 FOCO FINAL
+Criar urgência (tempo + vagas)
+Aumentar desejo
+Deixar mais direto e persuasivo
+Melhorar conversão sem quebrar o design
+📦 IMPORTANTE (RESPOSTA)
+Mostrar apenas os arquivos modificados
+Incluir novos componentes se necessário
+Não explicar, apenas entregar o código

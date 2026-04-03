@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FaWhatsapp } from "react-icons/fa";
 import { trpc } from "@/lib/trpc";
+import logoImg from "@assets/image_1775233079551.png";
 import {
   CheckCircle,
   Star,
@@ -26,6 +27,7 @@ import {
   Gift,
   MapPin,
   Quote,
+  AlertTriangle,
 } from "lucide-react";
 
 const WHATSAPP_NUMBER = "5511940000000";
@@ -33,6 +35,9 @@ const WHATSAPP_MESSAGE = encodeURIComponent(
   "Olá! Vi o site da Mestres do Site e gostaria de saber mais sobre como vocês podem me ajudar a conseguir mais clientes."
 );
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+
+const TOTAL_VAGAS = 220;
+const VAGAS_DISPONIVEIS = 9;
 
 const leadSchema = z.object({
   nome: z.string().min(2, "Nome é obrigatório"),
@@ -109,6 +114,15 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+function ScarcityBadge({ className = "" }: { className?: string }) {
+  return (
+    <div className={`inline-flex items-center gap-2 bg-red-600 text-white font-sans font-bold text-sm px-4 py-2 rounded-full shadow-lg ${className}`}>
+      <AlertTriangle className="h-4 w-4 flex-shrink-0" />
+      Apenas {VAGAS_DISPONIVEIS} de {TOTAL_VAGAS} vagas disponíveis
+    </div>
+  );
+}
+
 const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } };
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.12 } } };
 
@@ -127,41 +141,47 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
 
-      {/* ── URGENCY BAR ── */}
-      <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 py-2.5 px-4">
-        <div className="container flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
-          <div className="flex items-center gap-2 text-white font-sans text-sm font-medium">
-            <Clock className="h-4 w-4 text-yellow-300 flex-shrink-0" />
-            <span>Oferta por tempo limitado — análise gratuita encerra em:</span>
+      {/* ── FIXED TOP BAR (urgency + nav) ── */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        {/* ── URGENCY BAR ── */}
+        <div className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 py-2.5 px-4">
+          <div className="container flex flex-col sm:flex-row items-center justify-center gap-2 text-center">
+            <div className="flex items-center gap-2 text-white font-sans text-sm font-medium">
+              <Clock className="h-4 w-4 text-yellow-300 flex-shrink-0" />
+              <span>Oferta por tempo limitado — análise gratuita encerra em:</span>
+            </div>
+            <div className="flex items-center gap-1 font-mono font-bold text-sm">
+              {[countdown.h, countdown.m, countdown.s].map((unit, i) => (
+                <span key={i} className="flex items-center gap-1">
+                  <span className="bg-yellow-400 text-blue-900 px-2 py-0.5 rounded font-bold">{unit}</span>
+                  {i < 2 && <span className="text-yellow-300">:</span>}
+                </span>
+              ))}
+            </div>
+            <button onClick={scrollToForm} className="text-yellow-300 underline font-sans text-sm font-semibold hover:text-yellow-200 transition-colors whitespace-nowrap">
+              Garantir agora →
+            </button>
           </div>
-          <div className="flex items-center gap-1 font-mono font-bold text-sm">
-            {[countdown.h, countdown.m, countdown.s].map((unit, i) => (
-              <span key={i} className="flex items-center gap-1">
-                <span className="bg-yellow-400 text-blue-900 px-2 py-0.5 rounded font-bold">{unit}</span>
-                {i < 2 && <span className="text-yellow-300">:</span>}
-              </span>
-            ))}
-          </div>
-          <button onClick={scrollToForm} className="text-yellow-300 underline font-sans text-sm font-semibold hover:text-yellow-200 transition-colors whitespace-nowrap">
-            Garantir agora →
-          </button>
         </div>
+
+        {/* ── NAV ── */}
+        <nav className="bg-blue-900 shadow-md">
+          <div className="container py-3 flex items-center justify-between">
+            <img src={logoImg} alt="Mestres do Site" className="h-9 w-auto" />
+            <div className="flex items-center gap-3">
+              <a href="https://www.instagram.com/mestresdosite" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-1.5 text-blue-200 hover:text-white font-sans text-sm transition-colors">
+                <Instagram className="h-4 w-4" /> @mestresdosite
+              </a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-sans font-semibold px-4 py-2 rounded-full text-sm transition-colors">
+                <FaWhatsapp className="h-4 w-4" /> WhatsApp
+              </a>
+            </div>
+          </div>
+        </nav>
       </div>
 
-      {/* ── NAV ── */}
-      <nav className="bg-blue-900 sticky top-0 z-50 shadow-md">
-        <div className="container py-4 flex items-center justify-between">
-          <img src="/logo.png" alt="Mestres do Site" className="h-10 w-auto" />
-          <div className="flex items-center gap-3">
-            <a href="https://www.instagram.com/mestresdosite" target="_blank" rel="noopener noreferrer" className="hidden sm:flex items-center gap-1.5 text-blue-200 hover:text-white font-sans text-sm transition-colors">
-              <Instagram className="h-4 w-4" /> @mestresdosite
-            </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-sans font-semibold px-4 py-2 rounded-full text-sm transition-colors">
-              <FaWhatsapp className="h-4 w-4" /> WhatsApp
-            </a>
-          </div>
-        </div>
-      </nav>
+      {/* Spacer for fixed header */}
+      <div className="h-[108px]" />
 
       {/* ── HERO ── */}
       <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 overflow-hidden">
@@ -181,8 +201,12 @@ export default function Home() {
               por não ter um site que vende.
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-lg lg:text-xl text-blue-200 font-sans leading-relaxed mb-8 max-w-2xl mx-auto">
+            <motion.p variants={fadeUp} className="text-lg lg:text-xl text-blue-200 font-sans leading-relaxed mb-4 max-w-2xl mx-auto">
               Criamos sites profissionais e estratégias digitais que geram clientes reais — não só visitas. Mais contatos, mais vendas, mais crescimento.
+            </motion.p>
+
+            <motion.p variants={fadeUp} className="text-base text-yellow-300 font-sans font-semibold italic mb-8 max-w-xl mx-auto">
+              "Em 30 minutos de bate-papo, você pode mudar a história da sua empresa."
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -194,7 +218,11 @@ export default function Home() {
               </button>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-6 mt-10 text-blue-300 font-sans text-sm">
+            <motion.div variants={fadeUp} className="mt-6 flex justify-center">
+              <ScarcityBadge />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center gap-6 mt-6 text-blue-300 font-sans text-sm">
               {["Sem compromisso", "Resultado em 30 dias", "Garantia total"].map((item) => (
                 <span key={item} className="flex items-center gap-1.5">
                   <CheckCircle className="h-4 w-4 text-yellow-400" /> {item}
@@ -222,34 +250,69 @@ export default function Home() {
         <div className="container max-w-4xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="text-center mb-12">
             <motion.h2 variants={fadeUp} className="text-3xl lg:text-4xl font-bold text-blue-900 mb-4">
-              Seu negócio está invisível para quem quer comprar de você
+              Se algum desses problemas parece familiar, então você{" "}
+              <span className="text-red-600 underline decoration-wavy">PRECISA</span>{" "}
+              desse diagnóstico!
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-slate-600 font-sans text-lg max-w-2xl mx-auto">
-              Cada dia sem presença digital profissional é dinheiro que vai direto para o seu concorrente.
-            </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="grid sm:grid-cols-2 gap-4 mb-10">
             {[
-              "Site desatualizado que não transmite credibilidade",
-              "Clientes pesquisam no Google e encontram seu concorrente",
-              "Investe em anúncios mas não converte em vendas",
-              "Não sabe quantos clientes está perdendo por dia",
-              "Presença nas redes sociais sem estratégia real",
-              "Sem tempo para cuidar do marketing do próprio negócio",
+              "Depende de indicações que nunca têm previsibilidade",
+              "Já investe em marketing mas o resultado é bem abaixo do esperado",
+              "Não tem clareza dos dados de investimento e retorno",
+              "Depende demais da equipe comercial ou de networking",
+              "Não sabe dizer se sua empresa vai crescer até o final do ano",
             ].map((problem) => (
               <motion.div key={problem} variants={fadeUp} className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-4">
-                <span className="text-red-500 font-bold text-base mt-0.5 flex-shrink-0">✗</span>
+                <span className="text-xl flex-shrink-0 mt-0.5">😞</span>
                 <p className="text-slate-700 font-sans">{problem}</p>
               </motion.div>
             ))}
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} className="text-center">
-            <p className="text-lg text-blue-900 font-bold mb-5">A solução existe — e você pode ter acesso hoje mesmo.</p>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} className="text-center flex flex-col items-center gap-4">
+            <ScarcityBadge />
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-green-500 hover:bg-green-600 text-white font-sans font-bold px-8 py-3.5 rounded-full transition-all hover:scale-105 shadow-lg inline-flex items-center gap-2">
-              <FaWhatsapp className="h-5 w-5" /> Falar no WhatsApp agora
+              <FaWhatsapp className="h-5 w-5" /> Falar com a agência
             </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── BENEFÍCIOS DO DIAGNÓSTICO ── */}
+      <section className="py-16 lg:py-24 bg-blue-900">
+        <div className="container max-w-4xl mx-auto">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="text-center mb-10">
+            <motion.h2 variants={fadeUp} className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              O que você vai receber no diagnóstico...
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-blue-200 font-sans text-lg max-w-2xl mx-auto">
+              Em apenas uma sessão, vamos mapear os pontos críticos de crescimento e mostrar com clareza onde estão os gargalos.
+            </motion.p>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="grid sm:grid-cols-2 gap-4 mb-10">
+            {[
+              "Descobrir o potencial máximo do seu mercado no digital",
+              "Saber quanto desse mercado você pode dominar com o que já faz hoje",
+              "Plano para dominar mais espaço e crescer na internet",
+              "Quais ajustes estruturais podem acelerar seus resultados",
+            ].map((benefit) => (
+              <motion.div key={benefit} variants={fadeUp} className="flex items-start gap-3 bg-blue-800 border border-blue-700 rounded-xl p-5">
+                <CheckCircle className="h-5 w-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                <p className="text-white font-sans font-medium">{benefit}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUp} className="text-center">
+            <p className="text-yellow-300 font-sans font-semibold italic text-lg mb-6">
+              "Em 30 minutos de bate-papo, você pode mudar a história da sua empresa."
+            </p>
+            <button onClick={scrollToForm} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-sans font-bold px-8 py-4 rounded-full transition-all hover:scale-105 shadow-lg inline-flex items-center gap-2">
+              Quero meu diagnóstico gratuito <ArrowRight className="h-5 w-5" />
+            </button>
           </motion.div>
         </div>
       </section>
@@ -317,11 +380,14 @@ export default function Home() {
             </motion.div>
             <motion.div variants={fadeUp} className="flex flex-col gap-3 items-center">
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-blue-900 hover:bg-blue-800 text-white font-sans font-bold px-8 py-4 rounded-full transition-all hover:scale-105 shadow-xl inline-flex items-center gap-2 whitespace-nowrap">
-                <FaWhatsapp className="h-5 w-5" /> Quero minha análise gratuita
+                <FaWhatsapp className="h-5 w-5" /> Falar com a agência
               </a>
               <button onClick={scrollToForm} className="text-blue-900 font-sans text-sm underline hover:text-blue-700 transition-colors">
                 ou preencher formulário
               </button>
+              <div className="bg-red-600 text-white font-sans font-bold text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                <AlertTriangle className="h-3.5 w-3.5" /> Apenas {VAGAS_DISPONIVEIS} de {TOTAL_VAGAS} vagas
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -359,7 +425,7 @@ export default function Home() {
                   Mais de 3.500 empresas já transformaram seus resultados com as estratégias que ele desenvolveu.
                 </p>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-sans font-semibold px-5 py-2.5 rounded-full transition-colors text-sm shadow">
-                  <FaWhatsapp className="h-4 w-4" /> Falar com Giovanni
+                  <FaWhatsapp className="h-4 w-4" /> Falar com a agência
                 </a>
               </motion.div>
 
@@ -462,6 +528,61 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── QUEBRA DE OBJEÇÃO ── */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="container max-w-3xl mx-auto">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger} className="text-center">
+            <motion.h2 variants={fadeUp} className="text-3xl lg:text-4xl font-bold text-blue-900 mb-10">
+              Mas atenção...
+            </motion.h2>
+
+            <motion.div variants={stagger} className="grid sm:grid-cols-2 gap-4 mb-8">
+              <motion.div variants={fadeUp} className="flex items-center gap-4 bg-red-50 border border-red-200 rounded-2xl p-5">
+                <span className="text-2xl">🔴</span>
+                <p className="text-slate-800 font-sans font-semibold text-lg text-left">Não é aula</p>
+              </motion.div>
+              <motion.div variants={fadeUp} className="flex items-center gap-4 bg-red-50 border border-red-200 rounded-2xl p-5">
+                <span className="text-2xl">🔴</span>
+                <p className="text-slate-800 font-sans font-semibold text-lg text-left">Não é apresentação comercial</p>
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="flex items-center justify-center gap-4 bg-green-50 border-2 border-green-400 rounded-2xl p-6 mb-10">
+              <span className="text-2xl">🟢</span>
+              <p className="text-green-800 font-sans font-bold text-xl">
+                É uma conversa estratégica focada na sua realidade
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── CTA FINAL ── */}
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900">
+        <div className="container max-w-3xl mx-auto text-center">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={stagger}>
+            <motion.h2 variants={fadeUp} className="text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
+              Agende esse negócio{" "}
+              <span className="text-yellow-400">agora</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-blue-200 font-sans text-lg mb-8 italic">
+              "Em 30 minutos de bate-papo, você pode mudar a história da sua empresa."
+            </motion.p>
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bg-green-500 hover:bg-green-600 text-white font-sans font-bold px-10 py-5 rounded-full text-lg transition-all hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2">
+                <FaWhatsapp className="h-6 w-6" /> Falar com a agência agora
+              </a>
+              <button onClick={scrollToForm} className="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-sans font-bold px-10 py-5 rounded-full text-lg transition-all hover:scale-105 shadow-xl inline-flex items-center justify-center gap-2">
+                Garantir minha vaga <ArrowRight className="h-6 w-6" />
+              </button>
+            </motion.div>
+            <motion.div variants={fadeUp} className="flex justify-center">
+              <ScarcityBadge />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── CTA MIDDLE ── */}
       <section className="py-14 bg-blue-900">
         <div className="container text-center">
@@ -535,6 +656,9 @@ export default function Home() {
             <motion.p variants={fadeUp} className="text-blue-200 font-sans text-lg">
               Preencha e entraremos em contato em até 24 horas — ou fale direto no WhatsApp.
             </motion.p>
+            <motion.div variants={fadeUp} className="mt-4 flex justify-center">
+              <ScarcityBadge />
+            </motion.div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="bg-white rounded-2xl p-8 shadow-2xl">
@@ -545,7 +669,7 @@ export default function Home() {
                   <h3 className="text-2xl font-bold text-blue-900 mb-2">Recebemos sua solicitação!</h3>
                   <p className="text-slate-600 font-sans mb-6">Nossa equipe entrará em contato em até 24 horas. Para resposta imediata, nos chame no WhatsApp.</p>
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-sans font-semibold px-6 py-3 rounded-full transition-colors shadow">
-                    <FaWhatsapp className="h-5 w-5" /> Falar no WhatsApp agora
+                    <FaWhatsapp className="h-5 w-5" /> Falar com a agência agora
                   </a>
                 </motion.div>
               ) : (
@@ -596,7 +720,7 @@ export default function Home() {
                   </div>
 
                   <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="w-full bg-green-500 hover:bg-green-600 text-white font-sans font-bold py-4 rounded-full text-base transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg">
-                    <FaWhatsapp className="h-5 w-5" /> Falar no WhatsApp agora
+                    <FaWhatsapp className="h-5 w-5" /> Falar com a agência agora
                   </a>
 
                   <p className="text-center text-slate-400 font-sans text-xs">Seus dados estão seguros. Não enviamos spam.</p>
@@ -612,7 +736,7 @@ export default function Home() {
         <div className="container">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             <div>
-              <img src="/logo.png" alt="Mestres do Site" className="h-10 w-auto mb-3" />
+              <img src={logoImg} alt="Mestres do Site" className="h-9 w-auto mb-3" />
               <p className="text-blue-300 font-sans text-sm leading-relaxed">
                 Transformando negócios brasileiros com presença digital que realmente vende.
               </p>
@@ -649,7 +773,7 @@ export default function Home() {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:shadow-green-500/50 transition-all hover:scale-110"
+        className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:shadow-green-500/50 transition-all hover:scale-110"
         title="Falar no WhatsApp"
       >
         <FaWhatsapp className="h-7 w-7" />
