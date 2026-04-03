@@ -10,7 +10,7 @@ Professional landing page ("optipage") for **Mestres do Site**, a digital market
 
 - **Frontend**: React 19 + TypeScript + Tailwind CSS 4 + Framer Motion + shadcn/ui (Radix UI)
 - **Backend**: Node.js + Express + tRPC
-- **ORM**: Drizzle ORM with MySQL
+- **ORM**: Drizzle ORM with PostgreSQL (migrated from MySQL on Replit)
 - **Build**: Vite (frontend) + ESBuild (backend)
 - **Package Manager**: pnpm
 
@@ -40,7 +40,7 @@ pnpm run start # Production server
 
 ## Key Features
 
-- **Lead capture form** — Validates and stores leads (name, email, phone, company, role) via tRPC → MySQL
+- **Lead capture form** — Validates and stores leads (name, email, phone, company, role) via tRPC → PostgreSQL
 - **WhatsApp CTAs** — Multiple strategic WhatsApp redirect buttons throughout the page
 - **Animated landing page** — Framer Motion scroll animations, stat counters, FAQ accordion
 - **Privacy Policy page** — LGPD-compliant at `/politica-de-privacidade`
@@ -48,21 +48,24 @@ pnpm run start # Production server
 
 ## Environment Variables
 
-- `DATABASE_URL` — MySQL connection string (required for lead storage)
-- `JWT_SECRET` — Cookie signing secret
-- `OAUTH_SERVER_URL` — OAuth server for admin auth
-- `VITE_APP_ID` — App ID for OAuth
-- `OWNER_OPEN_ID` — OpenID of the admin user
+- `DATABASE_URL` — PostgreSQL connection string (provided automatically by Replit)
+- `JWT_SECRET` — Cookie signing secret (set during migration)
+- `OAUTH_SERVER_URL` — OAuth server for admin auth (optional, add via Secrets for full auth)
+- `VITE_APP_ID` — App ID for OAuth (optional)
+- `OWNER_OPEN_ID` — OpenID of the admin user (optional)
 
 ## Deployment
 
 - **Target**: Autoscale
 - **Build**: `pnpm run build`
-- **Run**: `node dist/index.js`
+- **Run**: `node dist/index.cjs`
 - **Port**: 5000
 
 ## Replit Migration Notes
 
-- The `dev` script uses `npx tsx` to ensure `tsx` is resolved via `node_modules/.bin` in the Replit shell environment
+- Migrated database from MySQL to PostgreSQL (Replit's built-in database)
+- Updated Drizzle schema and config to use `pg` driver instead of `mysql2`
+- The `dev` script uses locally installed `tsx` (not `npx tsx`) to avoid interactive prompts
 - The workflow "Start application" runs `npm run dev` on port 5000 with webview output
-- Missing env vars (`OAUTH_SERVER_URL`, `VITE_ANALYTICS_ENDPOINT`, `VITE_ANALYTICS_WEBSITE_ID`) produce warnings but the app runs without them — add them via Replit Secrets for full functionality
+- Analytics script removed from `index.html` (was causing Vite substitution errors); add `VITE_ANALYTICS_ENDPOINT` and `VITE_ANALYTICS_WEBSITE_ID` env vars if needed
+- OAuth warnings at startup are expected if `OAUTH_SERVER_URL` is not configured — app runs fine without it
